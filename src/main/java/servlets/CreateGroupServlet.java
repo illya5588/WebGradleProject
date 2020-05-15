@@ -1,5 +1,6 @@
 package servlets;
 
+import exceptions.DateException;
 import exceptions.NameException;
 import jdbc.GroupRepository;
 import model.Group;
@@ -31,7 +32,7 @@ public class CreateGroupServlet extends HttpServlet {
             GroupRepository.addGroup(group);
             request.setAttribute("groups",GroupRepository.getAllGroups());
             request.getRequestDispatcher("/views/index.jsp").forward(request,response);
-        } catch (SQLException|NameException throwables) {
+        } catch (SQLException|NameException| DateException throwables) {
             throwables.printStackTrace();
             request.setAttribute("error",throwables.getMessage());
             request.getRequestDispatcher("/views/error.jsp").forward(request,response);

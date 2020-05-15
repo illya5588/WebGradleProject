@@ -1,6 +1,6 @@
 package exceptions;
 
-public class NameException extends Exception {
+public class NameException extends RuntimeException {
     private String title;
 
     public NameException(String title, String message) {

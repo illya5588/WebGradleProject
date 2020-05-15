@@ -43,20 +43,8 @@ public class Student extends User implements Comparable<Student> {
 
     public Student(String surname, String name, LocalDate date) {
         //super(date);
-        try {
-
-            this.setSurname(surname);
-        } catch (NameException e) {
-            this.surname = "X";
-
-        }
-        try {
-            this.setName(name);
-
-        } catch (NameException e) {
-
-            this.name = "X";
-        }
+        this.setSurname(surname);
+        this.setName(name);
 
         if (Period.between(date, LocalDate.now()).getYears() > MIN_STUDENT_AGE) {
             this.DOB = date;

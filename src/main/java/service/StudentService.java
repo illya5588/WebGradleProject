@@ -1,11 +1,17 @@
 package service;
 
+import exceptions.NameException;
+import jdbc.GroupRepository;
+import jdbc.StudentRepository;
+import model.Group;
 import model.Mark;
 import model.Student;
 import model.Subject;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Optional;
 //TODO print method should to be with toString
 //
 
@@ -30,6 +36,18 @@ public class StudentService  {
 
 
     //Methods
+    public static void addOrEditStudent(Student student, int groupId) throws NameException, SQLException {
+        if(groupId!=0){
+            student.setGroup(GroupRepository.getGroupById(groupId));
+        }
+        if(student.getStudent_ID()!=0){
+            StudentRepository.editStudent(student);
+        } else{
+            StudentRepository.addStudent(student);
+        }
+
+
+    }
 
     public StringBuilder subjectWithtMarkTransformation() {
         StringBuilder sb = new StringBuilder();

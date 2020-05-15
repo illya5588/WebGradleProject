@@ -1,0 +1,75 @@
+
+;
+gradlew.bat,2/a/2a45a911a8f1836b0b6c5b758962572012d8f8c3
+O
+src/main/java/model/Notice.java,c/a/ca2ff503b7190d4c410378271e03c2ebd7b539ab
+P
+ src/main/java/model/Teacher.java,3/8/38c499661356a25919efb01c752385780883a984
+P
+ src/main/java/model/Subject.java,c/f/cf50d3adfb90939265d7fc0f3b021efc4ca044e7
+T
+$src/main/java/model/SubjectType.java,1/2/1287fd57ae76c53b63bede20690b231cc22b45f1
+Q
+!src/main/java/model/WordMark.java,6/4/646c94693f5870a61fcd71437a60aeda8b0b79c5
+M
+src/main/java/model/Mark.java,5/3/536b381f73660b311b59803cdba947df9bd1e80f
+[
++src/main/java/exceptions/DateException.java,5/5/55c06ece68594ced3b1a88309e2d0154fda12b00
+]
+-src/main/java/exceptions/UniqueException.java,9/d/9dd342916305161e2c5dce04db2e7f61d413544f
+[
++src/main/java/exceptions/NameException.java,e/4/e4fca83940d5b067636e37375595078a24fec7de
+[
++src/main/java/exceptions/MarkException.java,0/4/041663c6423f0ad12e707fe66da61304abf2deed
+P
+ src/main/java/model/Manager.java,5/8/58b07ee7f6915ad212e222ace14003a949a8f3f8
+Y
+)src/main/java/jdbc/TeacherRepository.java,e/b/ebe1c1c2a4bfccc76c592173cb4436f521e56356
+Y
+)src/main/java/jdbc/SubjectRepository.java,9/1/91b3a606136a119144cafffb8560812cda646099
+]
+-src/main/java/jdbc/PostgresSqlConnection.java,7/1/71f9aa49634bc08aaaecfc9d458a2f86b1e90e11
+O
+src/main/webapp/views/error.jsp,d/f/df0be7e44c185342e6ae86dfd293ac8ff087aa22
+V
+&src/main/java/jdbc/UserRepository.java,1/5/15f8dc56fe54043bc790578e6d366cfdbd5cf2ed
+S
+#src/main/java/servlets/Servlet.java,a/d/ad2b2961c5de06db2b81594ed87f4395b4863374
+Y
+)src/main/java/service/TeacherService.java,8/8/8849957018d58ed6da62e3125d1321a3c4664f73
+W
+'src/main/java/service/GroupService.java,5/f/5fb99a3db8b4895460f423649e18b0dfc3250951
+Y
+)src/main/java/service/StudentService.java,4/4/440189e5f89d3fb13cb7f3447cb181415fe3fbc2
+W
+'src/main/java/jdbc/GroupRepository.java,5/2/5287b772ee7c0546cb965ba0013f847f2dae7874
+^
+.src/main/java/servlets/CreateGroupServlet.java,4/0/4057942eb4b71e8fbc8b1016c6a1990bce31f55e
+M
+src/main/java/model/User.java,8/e/8e1ebf0166aec1f7f81589f5763cf23a86e9c01e
+<
+build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
+P
+ src/main/java/model/Student.java,d/1/d17042647ab33d409319e23fbe218d86069c45a4
+Y
+)src/main/java/servlets/DeleteStudent.java,e/f/ef7665a57204363e4836c0c160c68102cbedbd4d
+Y
+)src/main/java/jdbc/StudentRepository.java,7/3/7308b28098dba4b93b51dfe73e2f5e67415f5ead
+Z
+*src/main/java/servlets/StudentServlet.java,d/5/d5bde138aa08485bc736b0778a435223f1825e12
+O
+src/main/webapp/views/table.jsp,8/d/8db90ee801455fa8aa832e7408ecc0f624fd017a
+X
+(src/main/java/servlets/GroupServlet.java,0/4/04aa80aa93170e179dd53dfb91bdfd3dba8d26a2
+O
+src/main/webapp/views/index.jsp,b/0/b0d7818cd09a1069afb216bb4d2b1429753c7986
+T
+$src/main/webapp/views/addstudent.jsp,7/a/7a6466a21cb248b086008f2eda49d39fcd0bb023
+c
+3src/main/java/servlets/CreateNewStudentServlet.java,7/e/7e4bfb41573a9aad1b5ac3148353a86197a025a6
+I
+src/main/webapp/index.jsp,8/e/8e6d3b70c9f5b02570779b0441540d45eceb0ded
+N
+src/main/java/model/Group.java,5/1/5132e8a4eb152f7822901a2a72996da30a3c88de
+Q
+!src/main/webapp/views/student.jsp,3/1/314657eb887fd6ecc74026a677a2d9a4d50c4d6c

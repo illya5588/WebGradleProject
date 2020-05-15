@@ -2,28 +2,46 @@ package jdbc;
 
 import exceptions.NameException;
 import exceptions.UniqueException;
-import model.Mark;
-import model.Student;
-import model.Subject;
-import model.User;
+import model.*;
 import org.postgresql.util.PSQLException;
+import service.StudentService;
 
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 
 public class StudentRepository {
 
- private static String ADD_NEW_STUDENT = "INSERT INTO students (student_uuid,user_id,created_on,group_id)"
-            + "values(?,?,?,?)";
+ private static String ADD_NEW_STUDENT = "INSERT INTO students (student_uuid,user_id,created_on)"
+            + "values(?,?,?)";
  private static String ADD_MARKS = "INSERT INTO marks (student_id,subject_id,mark,created_on)"
             + "values(?,?,?,?)";
 
+//TODO create delete student
+    //TODO add student to group (group is optional)
+    //TODO date refactor
+    //add bootstrap framework
 
+    public static List<Student> searchStudents(String parameter) throws SQLException {
+        List<Student> allStudents = new ArrayList<>();
+        String SEARCH_STUDENTS = "Select * From users WHERE surname like '"+parameter+"' or name like'"+parameter+"';";
+        Connection connection = PostgresSqlConnection.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(SEARCH_STUDENTS);
+        while (rs.next()) {
+            Student student = new Student(rs.getString("surname"),rs.getString("name"),rs.getDate("dateofbirth").toLocalDate());
+            student.setStudent_ID(StudentRepository.getStudentIdByFullInformation(student));
+            allStudents.add(student);
 
+        }
+
+        rs.close();
+        return allStudents;
+    }
     public static Student addStudent(Student student) throws SQLException, NameException {
         if (UserRepository.isUserPresent(student)) {
             if (isStudentPresent(student)) {
@@ -48,7 +66,6 @@ public class StudentRepository {
             preparedStatement.setObject(1, student.getStudent_uuid());
             preparedStatement.setInt(2, UserRepository.getUserIDByFullInformation(student));
             preparedStatement.setObject(3, LocalDateTime.now());
-            preparedStatement.setInt(4, GroupRepository.getGroupId(student.getGroup()));
             preparedStatement.executeUpdate();
 
             System.out.println("Student is successfully added!");
@@ -69,7 +86,7 @@ public class StudentRepository {
                     try (Connection connection = PostgresSqlConnection.getConnection()) {
                         PreparedStatement preparedStatement = connection.prepareStatement(ADD_MARKS, Statement.RETURN_GENERATED_KEYS);
 
-                        preparedStatement.setInt(1, StudentRepository.getStudentByFullInformation(student));
+                        preparedStatement.setInt(1, StudentRepository.getStudentIdByFullInformation(student));
                         preparedStatement.setInt(2, SubjectRepository.getSubjectID(subject));
                         preparedStatement.setInt(3, buf.get(subject).getDigitMark());
                         preparedStatement.setObject(4, LocalDateTime.now());
@@ -86,7 +103,7 @@ public class StudentRepository {
                 try (Connection connection = PostgresSqlConnection.getConnection()) {
                     PreparedStatement preparedStatement = connection.prepareStatement(ADD_MARKS,Statement.RETURN_GENERATED_KEYS);
 
-                    preparedStatement.setInt(1, StudentRepository.getStudentByFullInformation(student));
+                    preparedStatement.setInt(1, StudentRepository.getStudentIdByFullInformation(student));
                     preparedStatement.setInt(2, SubjectRepository.getSubjectID(subject));
                     preparedStatement.setInt(3, buf.get(subject).getDigitMark());
                     preparedStatement.setObject(4,LocalDateTime.now());
@@ -99,7 +116,7 @@ public class StudentRepository {
     }
 
     public static void addMarkForStudent(Student student, Subject subject, int mark) throws SQLException, NameException {
-        if(getStudentByFullInformation(student)==0|| SubjectRepository.getSubjectID(subject)==0){
+        if(getStudentIdByFullInformation(student)==0|| SubjectRepository.getSubjectID(subject)==0){
             throw new IllegalArgumentException("This student or subject does not exist");
         }
         String ADD_MARKS = "INSERT INTO marks (student_id,subject_id,mark,created_on)"
@@ -138,6 +155,10 @@ public class StudentRepository {
             System.out.println("Something wrong!!! Table is not created!");
             e.getStackTrace();
         }
+    }
+    public static List<Student> getStudentsByPage(int page){
+      //select * from users limit offset
+        return null;
     }
     public static void createMarksTable() {
         String sql = "CREATE TABLE IF NOT EXISTS marks" +
@@ -195,9 +216,7 @@ public class StudentRepository {
         return false;
     }
 
-    public static int getStudentByFullInformation(Student student) throws SQLException, NameException {
-        //User user  = student.getUser();
-       // UserRepository.getUserIDByFullInformation(user);
+    public static int getStudentIdByFullInformation(Student student) throws SQLException, NameException {
         String sql = "select student_id from students join users on (users.user_id = students.user_id) where users.surname = '"+student.getSurname()+"' AND users.name = '"+student.getName()+"' AND users.dateofbirth = '"+student.getDOB()+"'";
         try (Connection connection = PostgresSqlConnection.getConnection()) {
             Statement statement = connection.createStatement();
@@ -210,7 +229,7 @@ public class StudentRepository {
 
     public static boolean isStudentMarkPresent(Student student, Subject subject) throws SQLException, NameException {
 
-        String sql = " select*from marks where student_id = '"+ StudentRepository.getStudentByFullInformation(student)+ "' and subject_id = ' "+ SubjectRepository.getSubjectID(subject)+"' and mark = ' "+student.getMarks().get(subject).getDigitMark()+" '";
+        String sql = " select*from marks where student_id = '"+ StudentRepository.getStudentIdByFullInformation(student)+ "' and subject_id = ' "+ SubjectRepository.getSubjectID(subject)+"' and mark = ' "+student.getMarks().get(subject).getDigitMark()+" '";
         Connection connection = PostgresSqlConnection.getConnection();
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery(sql);
@@ -230,10 +249,71 @@ public class StudentRepository {
         ResultSet rs = statement.executeQuery(GET_ALL_STUDENTS);
 
         while (rs.next()) {
-            allStudents.add(new Student(rs.getString("surname"),rs.getString("name"),rs.getDate("dateofbirth").toLocalDate()));
+            Student student = new Student(rs.getString("surname"),rs.getString("name"),rs.getDate("dateofbirth").toLocalDate());
+            student.setStudent_ID(rs.getInt("student_id"));
+            allStudents.add(student);
+
         }
 
         rs.close();
         return allStudents;
+    }
+    public static void editStudentGroup(Student student){
+        String EDIT_STUDENT_GROUP = "Update students set  group_id ="+student.getGroup().getId()+" where student_id="+student.getStudent_ID()+";";
+        try (Connection connection = PostgresSqlConnection.getConnection();
+             PreparedStatement ps=connection.prepareStatement(EDIT_STUDENT_GROUP)){
+            ps.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void editStudent(Student student) throws NameException, SQLException {
+      String EDIT_STUDENT = "Update users set surname = '"+student.getSurname()+"', name  = '"+student.getName()+"', dateofbirth ='"+student.getDOB()+"', group_id ="+student.getGroup().getId()+" where user_id = (select user_id from students where student_id= '"+student.getStudent_ID()+"' );";
+
+        try (Connection connection = PostgresSqlConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(EDIT_STUDENT)) {
+            ps.execute();
+            System.out.println("Student is successfully updated");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public static Optional<Student> getStudentById(int id) throws SQLException {
+        String GET_STUDENT_BY_ID = "select * from students left join groups on groups.group_id  = students.group_id join users on users.user_id = students.user_id where student_id="+id+";";
+
+        Connection connection = PostgresSqlConnection.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(GET_STUDENT_BY_ID);
+
+        while (rs.next()) {
+
+            Student student = new Student(rs.getString("surname"),rs.getString("name"),rs.getDate("dateofbirth").toLocalDate());
+            Group group = new Group();
+            if(rs.getObject("group_id")==null){
+                student.setGroup(null);
+            }else {
+                group.setId(rs.getInt("group_id"));
+                group.setName(rs.getString("group_name"));
+                student.setGroup(group);
+                student.setStudent_ID(id);
+            }
+            return Optional.of(student);
+        }
+
+        rs.close();
+      return Optional.empty();
+    }
+
+    public static void deleteStudentById(int id){
+        String DELETE_STUDENT = "DELETE FROM students where student_id="+id;
+        try (Connection connection = PostgresSqlConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(DELETE_STUDENT)) {
+            ps.execute();
+            System.out.println("Student is successfully deleted! ");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

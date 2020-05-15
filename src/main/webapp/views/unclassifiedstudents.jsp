@@ -1,12 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
   User: illyashulman
-  Date: 04/05/2020
-  Time: 18:48
+  Date: 15/05/2020
+  Time: 21:36
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -15,35 +14,46 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <title>Groups</title>
+    <title>Student</title>
 </head>
-<body>
+<body bgcolor="white">
+
 <div class="container">
-    <h2>Groups</h2>
     <table class="table table-striped">
         <thead>
         <tr>
+            <th>Surname</th>
             <th>Name</th>
-            <th>Date of Creation</th>
-            <th>Group's students</th>
+            <th>Date of Birth</th>
 
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${groups}" var="group">
-        <tr>
-            <td>${group.name}</td>
-            <td>${group.dateOfCreation}</td>
-            <td><a href="${pageContext.request.contextPath}/groupstudents?id=${group.id}">View Students</a><br></td>
-        </tr>
+
+        <c:forEach items="${allsearched}" var="student">
+
+            <tr>
+                <td>${student.surname}</td>
+                <td>${student.name}</td>
+                <td>${student.DOB}</td>
+                <td><a href="${pageContext.request.contextPath}/newStudent?id=${student.student_ID}">Edit</a><br></td>
+                <td><a href="${pageContext.request.contextPath}/deleteStudent?id=${student.student_ID}">Delete</a><br></td>
 
 
-            </c:forEach>
+
+
+                <td valign="top">
+
+
+
+                </td>
+            </tr>
+        </c:forEach>
+        </form>
         </tbody>
     </table>
-    <a href="${pageContext.request.contextPath}/createGroup" class="btn btn-success btn-block" role="button">Create Group</a>
+    <a href="${pageContext.request.contextPath}/newStudent" class="btn btn-success btn-block" role="button">Add Student</a>
     <a href="${pageContext.request.contextPath}/" class="btn btn-primary btn-sm btn-block" role="button">Main Menu</a>
-    <input type="hidden" name="id" value="${group.id}">
 </div>
 
 

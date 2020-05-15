@@ -24,8 +24,10 @@ public class GroupServlet extends HttpServlet {
         try {
             List<Group> allGroups = GroupRepository.getAllGroups();
             request.setAttribute("groups",allGroups);
-            request.getRequestDispatcher("/views/index.jsp").forward(request,response);
-        } catch (SQLException throwables) {
+            request.getRequestDispatcher("/views/index.jpg").forward(request,response);
+            //request.getRequestDispatcher("/views/student.jpg").forward(request,response);
+
+        } catch (RuntimeException throwables) {
             throwables.printStackTrace();
 
             request.setAttribute("error",throwables.getMessage());

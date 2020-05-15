@@ -20,24 +20,35 @@ public class GroupRepository {
     private static String ADD_NEW_GROUP = "INSERT INTO groups (group_name, created_on)"
             + "values(?,?)";
     private static String GET_ALL_GROUPS = "SELECT * FROM groups";
+    private static String GET_STUDENT_BY_USER_ID = " select users.surname, users.name, users.dateofbirth, students.student_id from students join users on(users.user_id = students.user_id) ";
 
     public static void addGroup(Group group) throws SQLException, NameException {
-        if(isGroupPresent(group)){
+        if (isGroupPresent(group)) {
             throw new UniqueException("This group is already exists in the table!");
         }
         executePreparedStatementToAddGroup(group);
     }
 
-    public static List<Group> getAllGroups() throws SQLException {
+    public static List<Group> getAllGroups() {
         List<Group> groups = new ArrayList<>();
-        Connection connection = PostgresSqlConnection.getConnection();
-        Statement statement = connection.createStatement();
-        ResultSet rs = statement.executeQuery(GET_ALL_GROUPS);
+        Connection connection = null;
 
-        while (rs.next()) {
-            groups.add(new Group(rs.getString("group_name"),rs.getDate("created_on").toLocalDate()));
+        try {
+            connection = PostgresSqlConnection.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(GET_ALL_GROUPS);
+
+            while (rs.next()) {
+                Group group = new Group(rs.getString("group_name"), rs.getDate("created_on").toLocalDate());
+                group.setId(rs.getInt("group_id"));
+                groups.add(group);
+            }
+            return groups;
+        } catch (SQLException throwables) {
+            throw new RuntimeException(throwables);
         }
-        return groups;
+
+
     }
 
     private static void executePreparedStatementToAddGroup(Group group) throws SQLException, NameException {
@@ -84,14 +95,14 @@ public class GroupRepository {
 
     public static Set<Student> getAllUnclassifiedStudentsByGroup(Group group) throws SQLException, NameException {
         Set<Student> allStudents = new TreeSet<>();
-        String sql = "select users.surname, users.name, users.dateofbirth, students.student_id from students join marks on(students.student_id = marks.student_id) join users on(users.user_id=students.user_id) where students.group_name = '"+group.getName()+"' and marks.mark<=50;";
+        String sql = "select users.surname, users.name, users.dateofbirth, students.student_id from students join marks on(students.student_id = marks.student_id) join users on(users.user_id=students.user_id) where students.group_name = '" + group.getName() + "' and marks.mark<=50;";
 
         Connection connection = PostgresSqlConnection.getConnection();
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery(sql);
 
         while (rs.next()) {
-            Student student = new Student(rs.getString("surname"),rs.getString("name"),rs.getDate("dateofbirth").toLocalDate());
+            Student student = new Student(rs.getString("surname"), rs.getString("name"), rs.getDate("dateofbirth").toLocalDate());
             allStudents.add(student);
         }
 
@@ -101,7 +112,7 @@ public class GroupRepository {
 
     public static boolean isGroupPresent(Group group) throws SQLException {
 
-        String sql = "select group_id from groups where group_name= '"+group.getName()+"' AND created_on = '"+group.getDateOfCreation()+"'";
+        String sql = "select group_id from groups where group_name= '" + group.getName() + "' AND created_on = '" + group.getDateOfCreation() + "'";
         Connection connection = PostgresSqlConnection.getConnection();
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery(sql);
@@ -114,7 +125,7 @@ public class GroupRepository {
     }
 
     public static int getGroupId(Group group) throws SQLException, NameException {
-        String GET_GROUP_ID = "select group_id from groups where group_name = '"+group.getName()+"' AND created_on = '"+group.getDateOfCreation()+"'";
+        String GET_GROUP_ID = "select group_id from groups where group_name = '" + group.getName() + "' AND created_on = '" + group.getDateOfCreation() + "'";
         try (Connection connection = PostgresSqlConnection.getConnection()) {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(GET_GROUP_ID);
@@ -124,15 +135,32 @@ public class GroupRepository {
         }
     }
 
+    public static Group getGroupById(int id) throws SQLException, NameException {
+        String GET_GROUP_BY_ID = "select * from groups where group_id = " + id + ";";
+        try (Connection connection = PostgresSqlConnection.getConnection()) {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(GET_GROUP_BY_ID);
+
+            rs.next();
+            Group group = new Group();
+            group.setName(rs.getString("group_name"));
+            group.setDateOfCreation(rs.getDate("created_on").toLocalDate());
+            group.setId(rs.getInt("group_id"));
+            return group;
+        }
+    }
+
     public static List<Student> getStudentsByGroup(Group group) throws NameException, SQLException {
-      String GET_GROUP_LIST = " select users.surname, users.name, users.dateofbirth from students join groups on(students.group_id = groups.group_id) join users on(users.user_id = students.user_id) where groups.group_id = '"+getGroupId(group)+"'";
-      List<Student> groupStudents = new ArrayList<>();
+        String GET_GROUP_LIST = GET_STUDENT_BY_USER_ID+" join groups on(groups.group_id = students.group_id) where students.group_id = "+group.getId();
+        List<Student> groupStudents = new ArrayList<>();
         Connection connection = PostgresSqlConnection.getConnection();
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery(GET_GROUP_LIST);
 
         while (rs.next()) {
-            groupStudents.add(new Student(rs.getString("surname"),rs.getString("name"),rs.getDate("dateofbirth").toLocalDate()));
+         Student student=   new Student(rs.getString("surname"), rs.getString("name"), rs.getDate("dateofbirth").toLocalDate());
+         student.setStudent_ID(rs.getInt("student_id"));
+            groupStudents.add(student);
         }
         return groupStudents;
 

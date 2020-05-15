@@ -23,7 +23,7 @@ public  class User {
          } else {
 
 
-            throw new NameException(this.surname, ": surname lenght should to be between 1 and "+MAX_LENGHT_SURNAME+" characters ");
+            throw new NameException(surname, ": surname lenght should to be between 1 and "+MAX_LENGHT_SURNAME+" characters ");
           }
     }
 

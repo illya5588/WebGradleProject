@@ -18,9 +18,20 @@ dependencies {
     // https://mvnrepository.com/artifact/org.postgresql/postgresql
     compile group: 'org.postgresql', name: 'postgresql', version: '42.2.12'
     // https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl-api
-    compile group: 'javax.servlet.jsp.jstl', name: 'jstl-api', version: '1.2'
+  //  compile group: 'javax.servlet.jsp.jstl', name: 'jstl-api', version: '1.2'
      //https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl
    // compile group: 'javax.servlet.jsp.jstl', name: 'jstl', version: '1.2'
+   // providedCompile group: 'javax.servlet.jsp', name: 'jsp-api', version: '2.2.1-b03'
+
+//    providedCompile 'javax.servlet.jsp:jsp-api:2.2.1-b03'
+    // https://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-spec
+    compile group: 'org.apache.taglibs', name: 'taglibs-standard-spec', version: '1.2.5'
+    // https://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-impl
+    compile group: 'org.apache.taglibs', name: 'taglibs-standard-impl', version: '1.2.5'
+
+
+
+
 
 
 
