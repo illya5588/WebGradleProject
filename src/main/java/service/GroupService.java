@@ -1,9 +1,12 @@
 package service;
 
+import dto.GroupDTO;
+import jdbc.GroupRepository;
 import jdbc.StudentRepository;
 import model.Group;
 import model.Student;
 
+import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -24,11 +27,24 @@ public class GroupService {
         this.group = group;
     }
 
+    public List<GroupDTO> getAllGroups() throws SQLException {
+        List<GroupDTO> allGroupDto = new ArrayList<>();
+        for (Group group : GroupRepository.getAllGroups()) {
+            Set<Student> allStudents = new HashSet<>();
+            allStudents.addAll(GroupRepository.getStudentsByGroup(group));
+            group.setGroupList(allStudents);
+            GroupDTO groupDTO = new GroupDTO();
+            groupDTO = groupDTO.fromGroupToDto(group);
+            allGroupDto.add(groupDTO);
+        }
+        return allGroupDto;
+    }
 
     public void addStudent(Student student) {
         group.getGroupList().add(student);
         student.setGroup(group);
     }
+
     public List<Student> sortedBySurname() {
         List<Student> buf = new ArrayList<>(this.group.getGroupList());
         Collections.sort(buf, new Comparator<Student>() {
@@ -53,18 +69,15 @@ public class GroupService {
     }
 
 
-
-//Stream
+    //Stream
     public Set<Student> listOfStudentByAvMark(int mark) {
         Set<Student> buf = getGroup().getGroupList();
         buf = buf.stream()
-                .filter(student -> student.getAverageMark()>mark)
+                .filter(student -> student.getAverageMark() > mark)
                 .collect(Collectors.toSet());
 
         return buf;
     }
-
-
 
 
     public Set<Student> listOfStudentByGenAvMark(int mark) {
@@ -77,13 +90,13 @@ public class GroupService {
         return buf;
     }
 
-//TODO get unclassified student list
+    //TODO get unclassified student list
 //TODO create method deleteStudentFromGroup
 //TODO install PostgreSQL
-    public Set<Student> getUnclassifiedStudents(){
+    public Set<Student> getUnclassifiedStudents() {
         Set<Student> buf = getGroup().getGroupList();
-        buf =  buf.stream()
-                .filter(student -> student.getMarks().values().stream().anyMatch(mark -> mark.getLetterMark()=='U'))
+        buf = buf.stream()
+                .filter(student -> student.getMarks().values().stream().anyMatch(mark -> mark.getLetterMark() == 'U'))
                 .collect(Collectors.toSet());
         return buf;
     }
@@ -91,8 +104,8 @@ public class GroupService {
 
     public void deleteUnclassifiedStudent() {
         Set<Student> buf = new HashSet<>();
-        buf =  getGroup().getGroupList().stream()
-                .filter(student -> student.getMarks().values().stream().anyMatch(mark->mark.getDigitMark()>50))
+        buf = getGroup().getGroupList().stream()
+                .filter(student -> student.getMarks().values().stream().anyMatch(mark -> mark.getDigitMark() > 50))
                 .collect(Collectors.toSet());
         getGroup().getGroupList().clear();
         getGroup().getGroupList().addAll(buf);

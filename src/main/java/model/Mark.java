@@ -45,7 +45,7 @@ public class Mark {
         return " digitMark=" + digitMark +
                 ", letterMark=" + letterMark +
                 ", wordMark='" + wordMark + '\'' +
-                "}\n";
+                "\n";
     }
 
     public int getDigitMark() {

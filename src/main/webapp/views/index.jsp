@@ -25,6 +25,7 @@
         <tr>
             <th>Name</th>
             <th>Date of Creation</th>
+            <th>Number of students</th>
             <th>Group's students</th>
 
         </tr>
@@ -34,7 +35,16 @@
         <tr>
             <td>${group.name}</td>
             <td>${group.dateOfCreation}</td>
-            <td><a href="${pageContext.request.contextPath}/groupstudents?id=${group.id}">View Students</a><br></td>
+            <td>${group.groupList.size()}</td>
+            <c:choose>
+                <c:when test="${group.groupList.size()!=0}">
+                    <td><a href="${pageContext.request.contextPath}/groupstudents?id=${group.id}">View Students</a><br></td>
+                </c:when>
+                <c:otherwise>
+                    <td><a href="${pageContext.request.contextPath}/AddStudentToGroup?id=${group.id}">Add Student</a><br></td>
+                </c:otherwise>
+
+            </c:choose>
         </tr>
 
 
@@ -43,7 +53,7 @@
     </table>
     <a href="${pageContext.request.contextPath}/createGroup" class="btn btn-success btn-block" role="button">Create Group</a>
     <a href="${pageContext.request.contextPath}/" class="btn btn-primary btn-sm btn-block" role="button">Main Menu</a>
-    <input type="hidden" name="id" value="${group.id}">
+
 </div>
 
 

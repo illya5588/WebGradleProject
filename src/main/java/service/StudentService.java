@@ -39,6 +39,7 @@ public class StudentService  {
     public static void addOrEditStudent(Student student, int groupId) throws NameException, SQLException {
         if(groupId!=0){
             student.setGroup(GroupRepository.getGroupById(groupId));
+            StudentRepository.editStudentGroup(student);
         }
         if(student.getStudent_ID()!=0){
             StudentRepository.editStudent(student);

@@ -68,9 +68,7 @@ public  class User {
     @Override
     public String toString() {
         return
-                "\n surname='" + surname + '\n' +
-                        " name='" + name + '\n' +
-                        " DOB=" + DOB + ID;
+                "\n" + surname + '\n' + name + '\n' +DOB;
     }
 
 //    public User(LocalDate DOB) {

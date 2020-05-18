@@ -6,16 +6,9 @@ import model.Group;
 import model.Student;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
-//TODO add check dateofcreation is more than yesterday
-//TODO create method that returns group and students
-//TODO create table group (add when group were started)
-//TODO add GroupRepository and add to method get list of all groups that are present in the table
-//TODO group(link)-> list of all students;
+
 public class GroupRepository {
     private static String ADD_NEW_GROUP = "INSERT INTO groups (group_name, created_on)"
             + "values(?,?)";
@@ -29,6 +22,16 @@ public class GroupRepository {
         executePreparedStatementToAddGroup(group);
     }
 
+    public static void addStudentToGroup(Student student, Group group) throws SQLException {
+        String ADD_STUDENT_TO_GROUP = "Update students set  group_id =" + getGroupId(group) + " where student_id=" + StudentRepository.getStudentIdByFullInformation(student) + ";";
+        try (Connection connection = PostgresSqlConnection.getConnection();
+             Statement stmt = connection.createStatement()) {
+            stmt.executeUpdate(ADD_STUDENT_TO_GROUP);
+        } catch (SQLException e) {
+            e.getMessage();
+            e.getStackTrace();
+        }
+    }
     public static List<Group> getAllGroups() {
         List<Group> groups = new ArrayList<>();
         Connection connection = null;
@@ -41,6 +44,7 @@ public class GroupRepository {
             while (rs.next()) {
                 Group group = new Group(rs.getString("group_name"), rs.getDate("created_on").toLocalDate());
                 group.setId(rs.getInt("group_id"));
+                group.setGroupList(GroupRepository.getStudentsByGroup(group));
                 groups.add(group);
             }
             return groups;
@@ -150,9 +154,9 @@ public class GroupRepository {
         }
     }
 
-    public static List<Student> getStudentsByGroup(Group group) throws NameException, SQLException {
+    public static Set<Student> getStudentsByGroup(Group group) throws NameException, SQLException {
         String GET_GROUP_LIST = GET_STUDENT_BY_USER_ID+" join groups on(groups.group_id = students.group_id) where students.group_id = "+group.getId();
-        List<Student> groupStudents = new ArrayList<>();
+       Set<Student> groupStudents = new HashSet<>();
         Connection connection = PostgresSqlConnection.getConnection();
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery(GET_GROUP_LIST);

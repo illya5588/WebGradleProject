@@ -73,3 +73,25 @@ N
 src/main/java/model/Group.java,5/1/5132e8a4eb152f7822901a2a72996da30a3c88de
 Q
 !src/main/webapp/views/student.jsp,3/1/314657eb887fd6ecc74026a677a2d9a4d50c4d6c
+]
+-src/main/java/servlets/AddStudentToGroup.java,5/9/59847605f6d810ca341e3e65cd1b32c0b398814d
+W
+'src/main/webapp/views/confirmdelete.jsp,a/b/ab429de38611cd8abde56bbd5351f87cea09825a
+`
+0src/main/java/servlets/ConfirmStudentDelete.java,2/d/2d86b07fb5b27c07f44ac3c8cac59c57b7461be1
+S
+#.idea/sonarlint/issuestore/index.pb,9/f/9fe84ebb15faf917b7def6236dba604453cc61e0
+Z
+*src/main/webapp/views/searchedstudents.jsp,d/1/d1259b0da3301cc89f216611b32ce855236b2284
+`
+0src/main/java/servlets/UnclassifiedStudents.java,6/0/60fd35e5dc0d9833ec8e3d32a44c28e8b6e20e70
+^
+.src/main/webapp/views/unclassifiedstudents.jsp,7/5/75acd24b9eea11b2892868e664a8476204a2d2cd
+Y
+)src/main/java/servlets/GroupStudents.java,9/8/9854f0ac5d9dae6aae37a374051c5f92b190d3d2
+W
+'src/main/webapp/views/groupstudents.jsp,c/a/ca93e96ad3eea2db25d7240fc1275b4bafb237e6
+O
+src/main/java/dto/GroupDTO.java,c/e/ce021aa8075e9ff2ddf39208f133a25f67178434
+Z
+*src/main/java/servlets/SearchStudents.java,1/8/186d0152d71f6c43af3b5571eb6945d741a0d8aa

@@ -103,7 +103,7 @@ public class Student extends User implements Comparable<Student> {
 
     @Override
     public String toString() {
-        return super.toString().concat("\n average mark= " + String.valueOf(averageMark).concat("\n Student ID:").concat(String.valueOf(student_uuid)).concat("\n ").concat("\n\n"));
+        return super.toString();//.concat("\n average mark= " + String.valueOf(averageMark).concat("\n Student ID:").concat(String.valueOf(student_uuid)).concat("\n ").concat("\n\n"));
 
     }
 

@@ -17,19 +17,27 @@
 <div class="container">
     <h2>Students</h2>
     <div class="container">
-    <form action="SearchStudents" method="post">
+        <div class="row">
+    <form class="form-inline" action="SearchStudents" method="post">
 
         <input type="text" class="form-control" name="search" placeholder="please type..."><br>
-        <button type="submit" class="btn btn-outline-success">Search</button>
+        <button type="submit" class="btn btn-outline-success form-control">Search</button>
 
 </form>
+        </div>
+        <div class="row">
+            <a href="${pageContext.request.contextPath}/UnclassifiedStudents" class="btn btn-outline-danger" role="button">Unclassified Students</a>
+            <a href="${pageContext.request.contextPath}/AddMark" class="btn btn-outline-primary" role="button">Add Mark</a><br>
+        </div>
     </div>
+    <div class="row">
     <table class="table table-striped">
         <thead>
         <tr>
             <th>Surname</th>
             <th>Name</th>
             <th>Date of Birth</th>
+            <th>Group</th>
         </tr>
         </thead>
         <tbody>
@@ -40,7 +48,13 @@
                 <td>${student.surname}</td>
                 <td>${student.name}</td>
                 <td>${student.DOB}</td>
-                <td><a href="${pageContext.request.contextPath}/newStudent?id=${student.student_ID}">Edit</a><br></td>
+                <td>${student.group.name}</td>
+                <td><a href="${pageContext.request.contextPath}/newStudent?id=${student.student_ID}" class="btn btn-outline-primary" role="button">Edit</a><br></td>
+
+                <form action="GetMarks" method="post">
+                    <input type="hidden" name="id" value="${student.student_ID}" hidden>
+                    <td><button type="submit" class="btn btn-outline-success">Marks</button></td><br>
+                </form>
                 <form action="ConfirmStudentDelete" method="post">
                     <input type="hidden" name="id" value="${student.student_ID}" hidden>
                     <td><button type="submit" class="btn btn-outline-danger">Delete</button></td><br>
@@ -52,9 +66,11 @@
         </c:forEach>
         </tbody>
     </table>
-    <a href="${pageContext.request.contextPath}/" class="btn btn-danger btn-sm btn-block" role="button">Unclassified Students</a>
-    <a href="${pageContext.request.contextPath}/newStudent" class="btn btn-success btn-block" role="button">Add Student</a>
-    <a href="${pageContext.request.contextPath}/" class="btn btn-primary btn-sm btn-block" role="button">Main Menu</a>
+    </div>
+<div class="row">
+    <a href="${pageContext.request.contextPath}/newStudent" class="btn btn-success btn-lg" role="button">Add Student</a>
+    <a href="${pageContext.request.contextPath}/" class="btn btn-primary btn-sm" role="button">Main Menu</a>
+</div>
 </div>
 
 

@@ -1,6 +1,5 @@
 package servlets;
 
-import exceptions.NameException;
 import jdbc.GroupRepository;
 import jdbc.StudentRepository;
 import model.Group;
@@ -13,40 +12,36 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
-@WebServlet(name = "AddStudentToGroup", urlPatterns = "/addstudenttogroup")
+
+@WebServlet(name = "AddStudentToGroup", urlPatterns = "/AddStudentToGroup")
 public class AddStudentToGroup extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int groupsSelect = Integer.valueOf(request.getParameter("groupsSelect"));
-        int studentId = Integer.valueOf(request.getParameter("student_id"));
-        Group group = new Group();
-       Student student = null;
+    int studentId = Integer.parseInt(request.getParameter("studentSelect"));
+    int groupId = Integer.parseInt(request.getParameter("groupId"));
+        try {
+            Student student = StudentRepository.getStudentById(studentId).get();
+            Group group = GroupRepository.getGroupById(groupId);
+            GroupRepository.addStudentToGroup(student,group);
+            request.setAttribute("groupstudents",GroupRepository.getStudentsByGroup(group));
+            request.getRequestDispatcher("/views/groupstudents.jsp").forward(request,response);
 
-        try {
-            group = GroupRepository.getGroupById(groupsSelect);
-            student = StudentRepository.getStudentById(studentId).get();
-        } catch (SQLException | NameException throwables) {
-            throwables.printStackTrace();
-        }
-        student.setGroup(group);
-        StudentRepository.editStudentGroup(student);
-        List<Student> allStudents = new ArrayList<>();
-        try {
-            allStudents = StudentRepository.getAllStudents();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        request.setAttribute("groupchangestudents",allStudents);
-        request.getRequestDispatcher("/views/student.jsp").forward(request,response);
 
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int groupsSelect = Integer.valueOf(request.getParameter("groupsSelect"));
-        int studentId = Integer.valueOf(request.getParameter("id"));
+        try {
+            int groupId = Integer.parseInt(request.getParameter("id"));
+            request.setAttribute("groupID",groupId);
+            request.setAttribute("students",StudentRepository.getAllStudents());
+            request.getRequestDispatcher("/views/addstudenttogroup.jsp").forward(request,response);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
 }

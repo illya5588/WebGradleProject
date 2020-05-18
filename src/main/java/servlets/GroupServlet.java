@@ -22,6 +22,7 @@ public class GroupServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+//            List<GroupDTO> allGroups = GroupService.getAllGroups();
             List<Group> allGroups = GroupRepository.getAllGroups();
             request.setAttribute("groups",allGroups);
             request.getRequestDispatcher("/views/index.jpg").forward(request,response);

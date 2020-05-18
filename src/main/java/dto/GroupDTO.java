@@ -1,21 +1,26 @@
-package model;
+package dto;
 
-import exceptions.DateException;
+import model.Group;
+import model.Student;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class Group {
+public class GroupDTO {
     protected String name;
     protected LocalDate dateOfCreation;
     protected int id;
 
-    public void setGroupList(Set<Student> groupList) {
-        this.groupList = groupList;
+    public int getStudentsNumber() {
+        return studentsNumber;
     }
+
+    public void setStudentsNumber(int studentsNumber) {
+        this.studentsNumber = studentsNumber;
+    }
+
+    protected int studentsNumber;
 
     public int getId() {
         return id;
@@ -40,7 +45,7 @@ public class Group {
     protected Set<Student> groupList = new LinkedHashSet<>();
 
 
-    public Group() {
+    public GroupDTO() {
     }
 
     public String getName() {
@@ -51,14 +56,21 @@ public class Group {
         this.name = name;
     }
 
-    public Group(String name, LocalDate dateOfCreation) {
+    public GroupDTO(String name, LocalDate dateOfCreation) {
         this.name = name;
         this.dateOfCreation = dateOfCreation;
 
 
     }
 
-
+    public GroupDTO fromGroupToDto(Group group){
+        GroupDTO groupDTO = new GroupDTO();
+        groupDTO.setId(group.getId());
+        groupDTO.setName(group.getName());
+        groupDTO.setDateOfCreation(group.getDateOfCreation());
+        groupDTO.setStudentsNumber(group.getGroupList().size());
+        return groupDTO;
+    }
     @Override
     public String toString() {
         return "Name: " + name + "\n Created on: " + dateOfCreation;

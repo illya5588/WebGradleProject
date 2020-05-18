@@ -47,6 +47,7 @@
         </c:forEach>
         </tbody>
     </table>
+    <a href="${pageContext.request.contextPath}/AddStudentToGroup?id=${groupId}" class="btn btn-primary btn-sm btn-block" role="button">Add Student</a>
     <a href="${pageContext.request.contextPath}/group" class="btn btn-success btn-block" role="button">All Groups</a>
     <a href="${pageContext.request.contextPath}/" class="btn btn-primary btn-sm btn-block" role="button">Main Menu</a>
 </div>

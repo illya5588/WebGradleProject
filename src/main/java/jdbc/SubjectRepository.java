@@ -62,6 +62,7 @@ public class SubjectRepository {
 
         while (rs.next()) {
             Subject subject = new Subject();
+            subject.setID(rs.getInt("subject_id"));
             subject.setName(rs.getString("name"));
             subject.setTerm(rs.getInt("term"));
             subject.setType(SubjectType.valueOf(rs.getString("type")));

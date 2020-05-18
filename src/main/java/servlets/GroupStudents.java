@@ -30,6 +30,7 @@ public class GroupStudents extends HttpServlet {
             throwables.printStackTrace();
         }
         try {
+            request.setAttribute("groupId",id);
             request.setAttribute("name",group.getName());
             request.setAttribute("groupstudents",GroupRepository.getStudentsByGroup(group));
             request.getRequestDispatcher("/views/groupstudents.jsp").forward(request,response);

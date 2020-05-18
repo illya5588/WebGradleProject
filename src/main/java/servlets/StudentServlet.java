@@ -28,8 +28,6 @@ public class StudentServlet extends HttpServlet {
 
         try {
             List<Student> allStudents = StudentRepository.getAllStudents();
-            List<Group> allGroups = GroupRepository.getAllGroups();
-            request.setAttribute("allgroups",allGroups);
             request.setAttribute("allstudents", allStudents);
             request.getRequestDispatcher("/views/student.jsp").forward(request,response);
 
