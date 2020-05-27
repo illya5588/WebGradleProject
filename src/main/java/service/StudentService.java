@@ -3,7 +3,6 @@ package service;
 import exceptions.NameException;
 import jdbc.GroupRepository;
 import jdbc.StudentRepository;
-import model.Group;
 import model.Mark;
 import model.Student;
 import model.Subject;
@@ -11,12 +10,11 @@ import model.Subject;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Optional;
-//TODO print method should to be with toString
-//
+import java.util.*;
 
 
-public class StudentService  {
+
+public class StudentService {
     protected Student student;
 
 
@@ -36,14 +34,49 @@ public class StudentService  {
 
 
     //Methods
+    public static List<Student> getStudentsByCriteria(String criteria, String order, int page) throws SQLException {
+        List<Student> allStudents = new ArrayList<>();
+
+        switch (criteria) {
+            case ("By surname"):
+                    allStudents = StudentRepository.getPageBySurname(page,order);
+                break;
+            case ("By group"):
+                allStudents = StudentRepository.getPageByGroup(page,order);
+                break;
+            case ("Default"):
+                allStudents = StudentRepository.getPage(page);
+                break;
+        }
+        return allStudents;
+    }
+
+    public static Integer getNumberOfPages() throws SQLException {
+        return StudentRepository.numOfPages();
+    }
+
+    public static Set<Student> getStudentsBySurname() throws SQLException {
+        return StudentRepository.getStudentsBySurname();
+
+    }
+
+    public static Set<Student> getStudentsByGroupAndSurname() throws SQLException {
+        return StudentRepository.getStudentsByGroupAndSurname();
+
+    }
+
+    public static Map<Integer, List<Student>> getStudentPages() throws SQLException {
+        return StudentRepository.getStudentsByPage();
+    }
+
     public static void addOrEditStudent(Student student, int groupId) throws NameException, SQLException {
-        if(groupId!=0){
+        if (groupId != 0) {
             student.setGroup(GroupRepository.getGroupById(groupId));
             StudentRepository.editStudentGroup(student);
         }
-        if(student.getStudent_ID()!=0){
+        if (student.getStudent_ID() != 0) {
             StudentRepository.editStudent(student);
-        } else{
+        } else {
             StudentRepository.addStudent(student);
         }
 
@@ -59,7 +92,6 @@ public class StudentService  {
         }
         return sb;
     }
-
 
 
 //    public char markTransformation(Mark mark) {
@@ -87,13 +119,11 @@ public class StudentService  {
 //    }
 
 
-
     public int age() {
         LocalDate today = LocalDate.now();
         Period result = Period.between(student.getDOB(), today);
         return result.getYears();
     }
-
 
 
     public void markUpdate(Subject subject, Mark mark) {
@@ -114,8 +144,7 @@ public class StudentService  {
     }
 
     public void print() {
-        System.out.println("\n\n"+this.student);
-
+        System.out.println("\n\n" + this.student);
 
 
     }

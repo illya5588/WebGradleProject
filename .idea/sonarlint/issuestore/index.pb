@@ -95,3 +95,13 @@ O
 src/main/java/dto/GroupDTO.java,c/e/ce021aa8075e9ff2ddf39208f133a25f67178434
 Z
 *src/main/java/servlets/SearchStudents.java,1/8/186d0152d71f6c43af3b5571eb6945d741a0d8aa
+S
+#src/main/java/servlets/AddMark.java,b/5/b589d4cc2e33c9eb8bce672da896a23617f435b3
+Q
+!src/main/webapp/views/addmark.jsp,a/1/a1773d69cb1c9c0c8c9f5951dc71e62a799ffadd
+[
++src/main/webapp/views/addstudenttogroup.jsp,3/b/3bc051ba86799d7e0e9495ddd9038197829caaa7
+T
+$src/main/java/servlets/GetMarks.java,8/f/8f2d6ad7c8570d4b995ff2cf53159e0513c5bece
+N
+src/main/webapp/views/mark.jsp,f/d/fddea8cea2b7781d5822f8e8b6d2fc9d2ccc7ac5

@@ -13,20 +13,136 @@ import java.util.*;
 
 
 public class StudentRepository {
+    private static int LIMIT = 5;
 
     private static String ADD_NEW_STUDENT = "INSERT INTO students (student_uuid,user_id,created_on)"
             + "values(?,?,?)";
     private static String ADD_MARKS = "INSERT INTO marks (student_id,subject_id,mark,created_on)"
             + "values(?,?,?,?)";
 
-    //TODO ignore UpperCase
-    //TODO groups via DTO
-    //TODO add student to Group
-    //TODO marks
+    //TODO sort by group
+    //TODO buttons (by surname, by group(by surname))
+    //TODO service and DTO
+    //TODO pagination
+    public static Map<Integer, List<Student>> getStudentsByPage() throws SQLException {
+        int numberOfPages = numOfPages();
+        int start = 0;
+        Map<Integer, List<Student>> studentPages = new HashMap<>();
+        for (int i = 1; i <= numberOfPages; i++) {
+            studentPages.put(i, getPage(start));
+            start = start + 5;
+        }
+        return studentPages;
+    }
 
+    //TODO start, limit, rename
+    public static List<Student> getPage(int page) throws SQLException {
+        int start = (page - 1) * 5;
+        List<Student> allStudents = new ArrayList<>();
+        String GET_ALL_STUDENTS = "select * from students join users on(users.user_id = students.user_id) limit " + LIMIT + " offset  " + start;
+
+        Connection connection = PostgresSqlConnection.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(GET_ALL_STUDENTS);
+
+        while (rs.next()) {
+            Student student = new Student(rs.getString("surname"), rs.getString("name"), rs.getDate("dateofbirth").toLocalDate());
+            student.setStudent_ID(rs.getInt("student_id"));
+            if (rs.getInt("group_id") != 0) {
+                student.setGroup(GroupRepository.getGroupById(Integer.valueOf(rs.getInt("group_id"))));
+            }
+
+            allStudents.add(student);
+
+        }
+
+        rs.close();
+        return allStudents;
+    }
+
+    public static List<Student> getPageBySurname(int page, String order) throws SQLException {
+        int start = (page - 1) * LIMIT;
+        List<Student> allStudents = new ArrayList<>();
+        String GET_ALL_STUDENTS = "select * from students join users on(users.user_id = students.user_id) order by surname " + order + "  limit " + LIMIT + " offset  " + start;
+
+        Connection connection = PostgresSqlConnection.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(GET_ALL_STUDENTS);
+
+        while (rs.next()) {
+            Student student = new Student(rs.getString("surname"), rs.getString("name"), rs.getDate("dateofbirth").toLocalDate());
+            student.setStudent_ID(rs.getInt("student_id"));
+            if (rs.getInt("group_id") != 0) {
+                student.setGroup(GroupRepository.getGroupById(Integer.valueOf(rs.getInt("group_id"))));
+            }
+
+            allStudents.add(student);
+
+        }
+
+        rs.close();
+        return allStudents;
+    }
+
+    public static List<Student> getPageByGroup(int page, String order) throws SQLException {
+        int start = (page - 1) * LIMIT;
+        List<Student> allStudents = new ArrayList<>();
+        String GET_ALL_STUDENTS = "select * from students join users on(users.user_id = students.user_id) order by group_id " + order + " , surname ASC  limit " + LIMIT + " offset  " + start;
+
+        Connection connection = PostgresSqlConnection.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(GET_ALL_STUDENTS);
+
+        while (rs.next()) {
+            Student student = new Student(rs.getString("surname"), rs.getString("name"), rs.getDate("dateofbirth").toLocalDate());
+            student.setStudent_ID(rs.getInt("student_id"));
+            if (rs.getInt("group_id") != 0) {
+                student.setGroup(GroupRepository.getGroupById(Integer.valueOf(rs.getInt("group_id"))));
+            }
+
+            allStudents.add(student);
+
+        }
+
+        rs.close();
+        return allStudents;
+    }
+
+    public static int numOfPages() throws SQLException {
+        int numOfPages = getNumberOfStudents() / 5;
+        if (getNumberOfStudents() % 5 != 0) {
+            numOfPages++;
+        }
+        return numOfPages;
+    }
+
+    public static int getNumberOfStudents() throws SQLException {
+        int numberOfStudents = getAllStudents().size();
+        return numberOfStudents;
+    }
+
+    //TODO change to GroupRep
+    private static Set<Student> getStudentsByCriteria(String sql) throws SQLException {
+        Set<Student> students = new LinkedHashSet<>();
+        Connection connection = PostgresSqlConnection.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(sql);
+
+        while (rs.next()) {
+            Student student = new Student(rs.getString("surname"), rs.getString("name"), rs.getDate("dateofbirth").toLocalDate());
+            if (rs.getInt("group_id") != 0) {
+                student.setGroup(GroupRepository.getGroupById(rs.getInt("group_id")));
+            }
+            student.setStudent_ID(rs.getInt("student_id"));
+            students.add(student);
+        }
+
+        rs.close();
+        return students;
+    }
 
     public static Map<Subject, Mark> getStudentMarks(int studentId) throws SQLException, MarkException {
-        Map<Subject,Mark> marks  = new HashMap<>();
+        Map<Subject, Mark> marks = new HashMap<>();
         String GET_STUDENT_MARKS = "select*from marks join students on(students.student_id = marks.student_id) where students.student_id=" + studentId;
         Connection connection = PostgresSqlConnection.getConnection();
         Statement statement = connection.createStatement();
@@ -34,27 +150,32 @@ public class StudentRepository {
 
         while (rs.next()) {
 
-            marks.put(SubjectRepository.getSubjectByID(rs.getInt("subject_id")).get(),new Mark(rs.getInt("mark")));
+            marks.put(SubjectRepository.getSubjectByID(rs.getInt("subject_id")).get(), new Mark(rs.getInt("mark")));
         }
 
         rs.close();
         return marks;
     }
-    public static List<Student> getUnclassified() throws SQLException {
-        List<Student> allStudents = new ArrayList<>();
-        String UNCLASSIFIED_STUDENTS ="select users.surname, users.name, users.dateofbirth, students.student_id from students join marks on(students.student_id = marks.student_id) join users on(users.user_id=students.user_id) where marks.mark<=50;";
-        Connection connection = PostgresSqlConnection.getConnection();
-        Statement statement = connection.createStatement();
-        ResultSet rs = statement.executeQuery(UNCLASSIFIED_STUDENTS);
 
-        while (rs.next()) {
-            Student student = new Student(rs.getString("surname"), rs.getString("name"), rs.getDate("dateofbirth").toLocalDate());
-            allStudents.add(student);
-        }
+    public static Set<Student> getStudentsBySurname() throws SQLException {
 
-        rs.close();
-        return allStudents;
+        String GET_STUDENTS_BY_SURNAME = "select * from students join users on(students.user_id = users.user_id) order by surname ASC;";
+        return getStudentsByCriteria(GET_STUDENTS_BY_SURNAME);
     }
+
+    public static Set<Student> getStudentsByGroupAndSurname() throws SQLException {
+
+        String GET_STUDENTS_BY_SURNAME_AND_GROUP = "select * from students join users on(students.user_id = users.user_id) order by group_id DESC, surname ASC;";
+        return getStudentsByCriteria(GET_STUDENTS_BY_SURNAME_AND_GROUP);
+    }
+
+
+    public static Set<Student> getUnclassified() throws SQLException {
+
+        String UNCLASSIFIED_STUDENTS = "select users.surname, users.name, users.dateofbirth, students.student_id, students.group_id from students join marks on(students.student_id = marks.student_id) join users on(users.user_id=students.user_id) where marks.mark<=50;";
+        return getStudentsByCriteria(UNCLASSIFIED_STUDENTS);
+    }
+
     public static List<Student> searchStudents(String parameter) throws SQLException {
         List<Student> allStudents = new ArrayList<>();
         String SEARCH_STUDENTS = "Select * From students join users on (users.user_id = students.user_id) WHERE surname ilike '%" + parameter + "%' or name ilike'%" + parameter + "%';";
@@ -190,10 +311,6 @@ public class StudentRepository {
         }
     }
 
-    public static List<Student> getStudentsByPage(int page) {
-        //select * from users limit offset
-        return null;
-    }
 
     public static void createMarksTable() {
         String sql = "CREATE TABLE IF NOT EXISTS marks" +
@@ -287,7 +404,7 @@ public class StudentRepository {
         while (rs.next()) {
             Student student = new Student(rs.getString("surname"), rs.getString("name"), rs.getDate("dateofbirth").toLocalDate());
             student.setStudent_ID(rs.getInt("student_id"));
-            if(rs.getInt("group_id")!=0){
+            if (rs.getInt("group_id") != 0) {
                 student.setGroup(GroupRepository.getGroupById(Integer.valueOf(rs.getInt("group_id"))));
             }
 
