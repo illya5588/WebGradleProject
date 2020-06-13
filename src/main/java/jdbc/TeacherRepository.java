@@ -2,6 +2,7 @@ package jdbc;
 
 import exceptions.NameException;
 import exceptions.UniqueException;
+import model.Student;
 import model.Teacher;
 
 import java.sql.*;
@@ -30,6 +31,36 @@ public class TeacherRepository {
 
         }
 
+    }
+    public static boolean addTeacherByUserId(int userId) throws SQLException {
+        String ADD_NEW_TEACHER = "INSERT INTO teachers (department,user_id,created_on)"
+                + "values(?,?,?)";
+        if(!(isTeacherPresentByUserId(userId))){
+            try (Connection connection = PostgresSqlConnection.getConnection()) {
+                PreparedStatement preparedStatement = connection.prepareStatement(ADD_NEW_TEACHER);
+                preparedStatement.setString(1, "java");
+                preparedStatement.setInt(2, userId);
+                preparedStatement.setObject(3, LocalDateTime.now());
+                preparedStatement.executeUpdate();
+                System.out.println("Teacher is successfully added!");
+                return true;
+            }
+
+        }
+        return false;
+    }
+    public static boolean isTeacherPresentByUserId(int userId) throws SQLException {
+
+        String sql = "select teacher_id from teachers  where user_id="+userId+";";
+        Connection connection = PostgresSqlConnection.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(sql);
+
+        while (rs.next()) {
+            return true;
+        }
+
+        return false;
     }
 
      private static void getPreparedStatementToAddTeacher(Teacher teacher) throws SQLException, NameException {

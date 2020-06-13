@@ -3,6 +3,7 @@ package service;
 import exceptions.NameException;
 import jdbc.GroupRepository;
 import jdbc.StudentRepository;
+import jdbc.UserRepository;
 import model.Mark;
 import model.Student;
 import model.Subject;
@@ -34,15 +35,19 @@ public class StudentService {
 
 
     //Methods
-    public static List<Student> getStudentsByCriteria(String criteria, String order, int page) throws SQLException {
+    public static void confirmStudent(int userId) throws SQLException {
+        StudentRepository.addStudentByUserId(userId);
+        UserRepository.markConfirmed(userId,"student");
+    }
+    public static List<Student> getStudentsByCriteria(Pageable pageable, int page) throws SQLException {
         List<Student> allStudents = new ArrayList<>();
 
-        switch (criteria) {
+        switch (pageable.criteria) {
             case ("By surname"):
-                    allStudents = StudentRepository.getPageBySurname(page,order);
+                    allStudents = StudentRepository.getPageBySurname(page,pageable.order,pageable.success);
                 break;
             case ("By group"):
-                allStudents = StudentRepository.getPageByGroup(page,order);
+                allStudents = StudentRepository.getPageByGroup(page,pageable.order);
                 break;
             case ("Default"):
                 allStudents = StudentRepository.getPage(page);

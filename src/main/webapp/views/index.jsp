@@ -9,6 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
+    <h6>${sessionScope.surname} ${sessionScope.name}</h6>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -16,10 +17,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <title>Groups</title>
+    <a href="${pageContext.request.contextPath}/Logout">Log Out</a>
 </head>
 <body>
 <div class="container">
     <h2>Groups</h2>
+    ${sessionScope.role}
     <table class="table table-striped">
         <thead>
         <tr>
@@ -41,7 +44,14 @@
                     <td><a href="${pageContext.request.contextPath}/groupstudents?id=${group.id}">View Students</a><br></td>
                 </c:when>
                 <c:otherwise>
-                    <td><a href="${pageContext.request.contextPath}/AddStudentToGroup?id=${group.id}">Add Student</a><br></td>
+                    <c:choose>
+                    <c:when test="${'admin' eq sessionScope.role}">
+                    <td><a href="${pageContext.request.contextPath}/admin/addStudent?id=${group.id}">Add Student</a><br></td>
+                    </c:when>
+                        <c:otherwise>
+                            <td></td>
+                        </c:otherwise>
+                    </c:choose>
                 </c:otherwise>
 
             </c:choose>
@@ -51,7 +61,13 @@
             </c:forEach>
         </tbody>
     </table>
-    <a href="${pageContext.request.contextPath}/createGroup" class="btn btn-success btn-block" role="button">Create Group</a>
+    <c:choose>
+        <c:when test="${'admin' eq sessionScope.role}">
+            <a href="${pageContext.request.contextPath}/createGroup" class="btn btn-success btn-block" role="button">Create Group</a>
+        </c:when>
+
+    </c:choose>
+
     <a href="${pageContext.request.contextPath}/" class="btn btn-primary btn-sm btn-block" role="button">Main Menu</a>
 
 </div>

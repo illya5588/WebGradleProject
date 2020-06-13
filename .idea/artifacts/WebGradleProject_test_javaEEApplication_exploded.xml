@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ear" name="WebGradleProject.test:javaEEApplication exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/WebGradleProject_test_javaEEApplication_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="WebGradleProject.test/javaeeApplication/javaEEApplication" />
+    </root>
+  </artifact>
+</component>

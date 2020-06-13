@@ -80,10 +80,8 @@ public class Student extends User implements Comparable<Student> {
         return Objects.hash(surname, name, DOB);
     }
 
-    public UUID genID() {
+    public static UUID genID() {
         return UUID.randomUUID();
-
-
     }
 
 

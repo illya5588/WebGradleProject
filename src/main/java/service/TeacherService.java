@@ -1,6 +1,10 @@
 package service;
 
+import jdbc.TeacherRepository;
+import jdbc.UserRepository;
 import model.Teacher;
+
+import java.sql.SQLException;
 
 public class TeacherService {
     protected Teacher teacher;
@@ -23,5 +27,9 @@ public class TeacherService {
 
 
         return sb.toString();
+    }
+    public static void confirmTeacher(int id) throws SQLException {
+        TeacherRepository.addTeacherByUserId(id);
+        UserRepository.markConfirmed(id,"teacher");
     }
 }

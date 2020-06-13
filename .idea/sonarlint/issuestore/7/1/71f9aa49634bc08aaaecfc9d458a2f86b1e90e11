@@ -1,0 +1,11 @@
+
+S	java:S106$"9Replace this use of System.out or System.err by a logger.(ıË¶ˆøÿÿÿÿ
+V	java:S125"<This block of commented-out lines of code should be removed.(š°Ë²ıÿÿÿÿ
+S	java:S106"9Replace this use of System.out or System.err by a logger.(Î¾Ïìüÿÿÿÿ
+>
+java:S1148%"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+}
+java:S1488"bImmediately return this expression instead of assigning it to the temporary variable "connection".(ŠÚ€ûÿÿÿÿ
+O
+java:S4925"-Remove this "Class.forName()", it is useless.(õ†¨Äùÿÿÿÿ8ààÎªŸ.
+U	java:S106"9Replace this use of System.out or System.err by a logger.( íä8ààÎªŸ.

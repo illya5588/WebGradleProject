@@ -1,0 +1,43 @@
+
+j
+java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(½¨“Ğúÿÿÿÿ
+k	java:S117P"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(éÀ­éøÿÿÿÿ
+f	java:S117_"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(´Ù¯ˆ
+O	java:S106‰"9Replace this use of System.out or System.err by a logger.(ƒùè´
+^
+java:S2095•"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(‚µŠ¯
+]
+java:S2095="GUse try-with-resources or close this "ResultSet" in a "finally" clause.(‚µŠ¯
+U
+java:S1118":Add a private constructor to hide the implicit public one.(Œû³Ïøÿÿÿÿ
+e
+java:S2095."OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Í²æ®
+S	java:S106{"9Replace this use of System.out or System.err by a logger.(£Áâ£úÿÿÿÿ
+M	java:S106 "9Replace this use of System.out or System.err by a logger.(®ôÇ7
+b
+java:S2095a"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ
+k	java:S117M"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¹ö÷Ùıÿÿÿÿ
+c
+java:S2095¢"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ
+S	java:S1062"9Replace this use of System.out or System.err by a logger.(‡—’ùÿÿÿÿ
+c
+java:S2095”"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ
+b
+java:S2095<"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ
+]
+java:S2095b"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(‡÷¾ï
+h
+java:S1192A"KDefine a constant instead of duplicating this literal "subject_id" 3 times.(¶–š8üëÍ¢.
+f	java:S117+"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ëô½
+^
+java:S2095£"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(‚µŠ¯
+?
+java:S1148‹"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+S	java:S106~"9Replace this use of System.out or System.err by a logger.(Åáî­üÿÿÿÿ
+g	java:S117¤"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Æ±÷
+M
+java:S1751˜"6Remove this "return" statement or make it conditional.(§¼Éç
+C
+java:S1481M"(Remove this unused "SQL" local variable.(¹ö÷Ùıÿÿÿÿ
+e
+java:S2095S"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ƒÿ§›

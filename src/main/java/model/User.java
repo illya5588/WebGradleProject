@@ -3,6 +3,7 @@ package model;
 import exceptions.DateException;
 import exceptions.NameException;
 
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -14,8 +15,43 @@ public  class User {
     protected String name;
     protected LocalDate DOB;
     protected int ID;
+    protected String login;
+    protected String password;
+    protected String role;
+    protected String base64;
 
 
+    public String getBase64() {
+        return base64;
+    }
+
+    public void setBase64(String base64) {
+        this.base64 = base64;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public void setSurname(String surname) throws NameException {
         if (surname.length() <= MAX_LENGHT_SURNAME && surname.length() > 1) {

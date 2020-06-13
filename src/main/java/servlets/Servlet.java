@@ -21,6 +21,7 @@ public class Servlet extends HttpServlet {
     }
 
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+
         try {
             PostgresSqlConnection.getConnection();
             request.setAttribute("successful","Connection successful");

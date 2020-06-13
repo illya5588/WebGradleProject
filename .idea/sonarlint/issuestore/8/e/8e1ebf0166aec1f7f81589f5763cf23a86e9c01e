@@ -1,0 +1,12 @@
+
+l	java:S117V"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Í£∞M8¢ﬁêŸ¶.
+c	java:S116"NRename this field "DOB" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÈíÓÑ
+]	java:S125n"<This block of commented-out lines of code should be removed.(ŸØå˚˛ˇˇˇˇ8¢ﬁêŸ¶.
+r	java:S117L"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—«©«˙ˇˇˇˇ8¢ﬁêŸ¶.
+g	java:S116"MRename this field "ID" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(…Ú¢˙˘ˇˇˇˇ
+Ö
+java:S11308"cRemove the declaration of thrown exception 'exceptions.NameException' which is a runtime exception.(âÏ∫âˇˇˇˇˇ8èò≠˜™.
+Ä
+java:S1130B"cRemove the declaration of thrown exception 'exceptions.NameException' which is a runtime exception.(Ã»¢µ8èò≠˜™.
+Ö
+java:S1130L"cRemove the declaration of thrown exception 'exceptions.DateException' which is a runtime exception.(—«©«˙ˇˇˇˇ8èò≠˜™.

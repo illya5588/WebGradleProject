@@ -60,15 +60,19 @@ public class StudentRepository {
         return allStudents;
     }
 
-    public static List<Student> getPageBySurname(int page, String order) throws SQLException {
+    public static List<Student> getPageBySurname(int page, String order, String success) throws SQLException {
         int start = (page - 1) * LIMIT;
         List<Student> allStudents = new ArrayList<>();
         String GET_ALL_STUDENTS = "select * from students join users on(users.user_id = students.user_id) order by surname " + order + "  limit " + LIMIT + " offset  " + start;
-
+        String GET_ALL_UNCLASSIFIED_STUDENTS = "select distinct surname, name, dateOfBirth, students.student_id, group_id from students join users on(users.user_id = students.user_id) join marks on(students.student_id=marks.student_id) where mark<50 order by surname " + order + "  limit " + LIMIT + " offset  " + start;
         Connection connection = PostgresSqlConnection.getConnection();
         Statement statement = connection.createStatement();
-        ResultSet rs = statement.executeQuery(GET_ALL_STUDENTS);
-
+        ResultSet rs = null;
+        if("unclassified".equals(success)){
+             rs = statement.executeQuery(GET_ALL_UNCLASSIFIED_STUDENTS);
+        } else {
+            rs = statement.executeQuery(GET_ALL_STUDENTS);
+        }
         while (rs.next()) {
             Student student = new Student(rs.getString("surname"), rs.getString("name"), rs.getDate("dateofbirth").toLocalDate());
             student.setStudent_ID(rs.getInt("student_id"));
@@ -82,6 +86,29 @@ public class StudentRepository {
 
         rs.close();
         return allStudents;
+    }
+
+    public static int getPagesBySurname(String success) throws SQLException {
+        int result=0;
+        String GET_ALL_STUDENTS = "select count (*) from students join users on(users.user_id = students.user_id) " ;
+        String GET_ALL_UNCLASSIFIED_STUDENTS = "select count( distinct surname) from students join users on(users.user_id = students.user_id) join marks on(students.student_id=marks.student_id) where mark<50";
+        Connection connection = PostgresSqlConnection.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet rs = null;
+        if("unclassified".equals(success)){
+            rs = statement.executeQuery(GET_ALL_UNCLASSIFIED_STUDENTS);
+        } else {
+            rs = statement.executeQuery(GET_ALL_STUDENTS);
+        }
+        while (rs.next()) {
+            result=rs.getInt(1);
+
+
+
+        }
+
+        rs.close();
+        return result;
     }
 
     public static List<Student> getPageByGroup(int page, String order) throws SQLException {
@@ -366,6 +393,34 @@ public class StudentRepository {
             return true;
         }
 
+        return false;
+    }
+    public static boolean isStudentPresentByUserId(int userId) throws SQLException {
+
+        String sql = "select student_id from students  where user_id="+userId+";";
+        Connection connection = PostgresSqlConnection.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(sql);
+
+        while (rs.next()) {
+            return true;
+        }
+
+        return false;
+    }
+    public static boolean addStudentByUserId(int userId) throws SQLException {
+        if(!(isStudentPresentByUserId(userId))){
+            try (Connection connection = PostgresSqlConnection.getConnection()) {
+                PreparedStatement preparedStatement = connection.prepareStatement(ADD_NEW_STUDENT, Statement.RETURN_GENERATED_KEYS);
+                preparedStatement.setObject(1, Student.genID());
+                preparedStatement.setInt(2, userId);
+                preparedStatement.setObject(3, LocalDateTime.now());
+                preparedStatement.executeUpdate();
+                System.out.println("Student is successfully added!");
+                return true;
+            }
+
+        }
         return false;
     }
 
