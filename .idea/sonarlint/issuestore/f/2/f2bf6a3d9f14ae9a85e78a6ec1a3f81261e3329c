@@ -1,0 +1,14 @@
+
+g
+java:S1301"KReplace this "switch" statement by "if" statements to increase readability.(¶„æ8å¿ù«.
+g
+java:S1301"KReplace this "switch" statement by "if" statements to increase readability.(µ•¡s8è™Çİ¦.
+U
+java:S1128"3Remove this unused import 'jdbc.StudentRepository'.(†‘õƒüÿÿÿÿ8Í‰Ñİ¦.
+W
+java:S1118":Add a private constructor to hide the implicit public one.(ÔÄëª8±éÅİ¦.
+=	java:S131""Add a default case to this switch.(µ•¡s8è™Çİ¦.
+O
+java:S1135
+"2Complete the task associated to this TODO comment.(½ûÌ©8° Éİ¦.
+=	java:S131""Add a default case to this switch.(¶„æ8å¿ù«.

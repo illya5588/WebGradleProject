@@ -1,62 +1,62 @@
 
-b
-java:S2095i"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ
-s	java:S117„"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(û‡Ü£ùÿÿÿÿ8±Û®— .
-c
-java:S2095†"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ
-b
-java:S2095y"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ
-n
-java:S3008"YRename this field "GET_ALL_GROUPS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(“¾E
-l
-java:S2095="OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Ôãõá8±Û®— .
-e
-java:S1192."IDefine a constant instead of duplicating this literal "group_id" 3 times.(¾á³8ââÆ .
-\
-java:S1118":Add a private constructor to hide the implicit public one.(÷‰ğÖúÿÿÿÿ8»È×“¡.
-j
-java:S2095‘"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8ââÆ .
-n	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—İ—¢8ùéæ“¡.
-e
-java:S2095‡"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(¨ô²ß8±Û®— .
-
-java:S1130"cRemove the declaration of thrown exception 'exceptions.NameException' which is a runtime exception.(†Ò†Ä8¶ç½“¡.
-U	java:S106]"9Replace this use of System.out or System.err by a logger.(ƒùè´8±Û®— .
-U	java:S106C"9Replace this use of System.out or System.err by a logger.(áÚØº8±Û®— .
-j
-java:S2095¢"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(€Äà÷ÿÿÿÿÿ8±Û®— .
-E
-java:S1148_"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8±Û®— .
 j
 java:S2095’"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(î´âüÿÿÿÿ8”øÊ .
-m	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹º‹ì8ŠÍíÇ¢.
-…
-java:S1130d"cRemove the declaration of thrown exception 'exceptions.NameException' which is a runtime exception.(ŒÆîÊûÿÿÿÿ8±Û®— .
-i
-java:S2095)"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8ÁÂ¯— .
-b	java:S1124"FDefine and throw a dedicated exception instead of using a generic one.( È·İ8±Û®— .
-s	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¦Öµûÿÿÿÿ8ââÆ .
-d
-java:S2095z"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(‚µŠ¯8±Û®— .
 c
-java:S2095¡"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ
+java:S2095†"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ
+s	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¦Öµûÿÿÿÿ8ââÆ .
+e
+java:S1192."IDefine a constant instead of duplicating this literal "group_id" 3 times.(¾á³8ââÆ .
+s
+java:S3008"XRename this field "ADD_NEW_GROUP" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ªŸ˜ûûÿÿÿÿ
 …
 java:S1130"cRemove the declaration of thrown exception 'exceptions.NameException' which is a runtime exception.(”† Òùÿÿÿÿ8¶ç½“¡.
+d
+java:S2095z"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(‚µŠ¯8±Û®— .
+m	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹º‹ì8ŠÍíÇ¢.
+U	java:S106]"9Replace this use of System.out or System.err by a logger.(ƒùè´8±Û®— .
 †
 java:S1130ƒ"cRemove the declaration of thrown exception 'exceptions.NameException' which is a runtime exception.(šÜ³†ıÿÿÿÿ8±Û®— .
+ƒ
+java:S3008"aRename this field "GET_STUDENT_BY_USER_ID" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—¿—Ÿûÿÿÿÿ8»È×“¡.
+j
+java:S2095‘"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8ââÆ .
+
+java:S1130"cRemove the declaration of thrown exception 'exceptions.NameException' which is a runtime exception.(†Ò†Ä8¶ç½“¡.
+S
+java:S1751}"6Remove this "return" statement or make it conditional.(§¼Éç8±Û®— .
 d
 java:S2095j"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(‚µŠ¯8±Û®— .
-
-java:S1130"cRemove the declaration of thrown exception 'exceptions.NameException' which is a runtime exception.(àöš8×ôÈ .
+c
+java:S2095¡"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ
+l
+java:S2095="OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Ôãõá8±Û®— .
+b	java:S1124"FDefine and throw a dedicated exception instead of using a generic one.( È·İ8±Û®— .
+\
+java:S1118":Add a private constructor to hide the implicit public one.(÷‰ğÖúÿÿÿÿ8»È×“¡.
+e
+java:S2095‡"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(¨ô²ß8±Û®— .
+b
+java:S2095y"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ
+j
+java:S2095¢"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(€Äà÷ÿÿÿÿÿ8±Û®— .
+…
+java:S1130d"cRemove the declaration of thrown exception 'exceptions.NameException' which is a runtime exception.(ŒÆîÊûÿÿÿÿ8±Û®— .
+U	java:S106C"9Replace this use of System.out or System.err by a logger.(áÚØº8±Û®— .
+Z	java:S106P"9Replace this use of System.out or System.err by a logger.(£Áâ£úÿÿÿÿ8±Û®— .
+i
+java:S2095)"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8ÁÂ¯— .
 d
 java:S2095*"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(Õ¶âœ8ÁÂ¯— .
 €
 java:S1130:"cRemove the declaration of thrown exception 'exceptions.NameException' which is a runtime exception.(ƒÄÏ‰8±Û®— .
+s	java:S117„"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(û‡Ü£ùÿÿÿÿ8±Û®— .
+E
+java:S1148_"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8±Û®— .
+
+java:S1130"cRemove the declaration of thrown exception 'exceptions.NameException' which is a runtime exception.(àöš8×ôÈ .
+b
+java:S2095i"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ
+n	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—İ—¢8ùéæ“¡.
+n
+java:S3008"YRename this field "GET_ALL_GROUPS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(“¾E
 Z	java:S106S"9Replace this use of System.out or System.err by a logger.(‹Ÿóàøÿÿÿÿ8±Û®— .
-Z	java:S106P"9Replace this use of System.out or System.err by a logger.(£Áâ£úÿÿÿÿ8±Û®— .
-ƒ
-java:S3008"aRename this field "GET_STUDENT_BY_USER_ID" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—¿—Ÿûÿÿÿÿ8»È×“¡.
-s
-java:S3008"XRename this field "ADD_NEW_GROUP" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ªŸ˜ûûÿÿÿÿ
-S
-java:S1751}"6Remove this "return" statement or make it conditional.(§¼Éç8±Û®— .

@@ -1,17 +1,11 @@
 
-U
-java:S1117 "9Rename "group" which hides the field declared at line 15.(™…¿`8Ïê•æ¡.
-R
-java:S1854j"7Remove this useless assignment to local variable "buf".(Ş¸Êüÿÿÿÿ
-i
-java:S1602A"SRemove useless curly braces around statement and then remove useless return keyword(€—ûß
-M
-java:S1135_"2Complete the task associated to this TODO comment.(ëÀ‚ôøÿÿÿÿ
 =
-java:S16042"(Make this anonymous inner class a lambda(Ã‰Ï4
-M
-java:S1135]"2Complete the task associated to this TODO comment.(®ƒÅúÿÿÿÿ
+java:S16043"(Make this anonymous inner class a lambda(Ã‰Ï4
+i
+java:S1602B"SRemove useless curly braces around statement and then remove useless return keyword(€—ûß
+R
+java:S1854h"7Remove this useless assignment to local variable "buf".(Ş¸Êüÿÿÿÿ
 U
 java:S1128"3Remove this unused import 'jdbc.StudentRepository'.(†‘õƒüÿÿÿÿ8Ïöû¯Ÿ.
-M
-java:S1135^"2Complete the task associated to this TODO comment.(Æà°Ëÿÿÿÿÿ
+U
+java:S1117!"9Rename "group" which hides the field declared at line 16.(™…¿`8Ïê•æ¡.

@@ -24,13 +24,13 @@ public class GetStudentsBySurname extends HttpServlet {
         try {
             Set<Student> allStudents = StudentService.getStudentsBySurname();
             request.setAttribute("allstudents", allStudents);
-            request.getRequestDispatcher("/views/student.jsp").forward(request,response);
+            request.getRequestDispatcher("/views/student/student.jsp").forward(request,response);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             System.out.println(throwables.getMessage());
             request.setAttribute("error", throwables.getMessage());
-            request.getRequestDispatcher("/views/error.jsp");
+            request.getRequestDispatcher("/views/errors/error.jsp");
         }
     }
 }

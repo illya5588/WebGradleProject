@@ -1,10 +1,9 @@
 package servlets.admin;
+
 import exceptions.NameException;
-import jdbc.GroupRepository;
-import jdbc.StudentRepository;
-import jdbc.UserRepository;
 import model.Group;
 import model.Student;
+import service.GroupService;
 import service.StudentService;
 
 import javax.servlet.ServletException;
@@ -32,51 +31,52 @@ public class CreateNewStudentServlet extends HttpServlet {
             if (!("").equals(request.getParameter("id"))) {
                 student.setStudent_ID(Integer.parseInt(request.getParameter("id")));
             }
-        } catch (NameException e){
-            errorRedirect(e,request,response);
+        } catch (NameException e) {
+            errorRedirect(e, request, response);
             return;
         }
 
         try {
             StudentService.addOrEditStudent(student, Integer.valueOf(groupID));
-            request.setAttribute("allstudents", StudentRepository.getAllStudents());
-            request.getRequestDispatcher("/views/student.jsp").forward(request, response);
+            request.setAttribute("allstudents", StudentService.getAllStudents());
+            request.getRequestDispatcher("/views/student/student.jsp").forward(request, response);
         } catch (SQLException e) {
-            errorRedirect(e,request,response);
+            errorRedirect(e, request, response);
         }
     }
+
     private void errorRedirect(Exception e, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         e.printStackTrace();
         request.setAttribute("error", e.getMessage());
-        request.getRequestDispatcher("/views/error.jsp").forward(request,response);
+        request.getRequestDispatcher("/views/errors/error.jsp").forward(request, response);
     }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Group> allGroups = new ArrayList<>();
-        allGroups = GroupRepository.getAllGroups();
+        allGroups = GroupService.getGroups();
         if (request.getParameter("id") != null) {
             int id = Integer.valueOf(request.getParameter("id"));
-
             Optional<Student> student = null;
             try {
-                student = StudentRepository.getStudentById(id);
+                student = StudentService.getStudentById(id);
             } catch (SQLException throwables) {
                 request.setAttribute("error", "Student is not present");
-                request.getRequestDispatcher("/views/error.jsp");
+                request.getRequestDispatcher("/views/errors/error.jsp");
                 throwables.printStackTrace();
             }
             if (student.isPresent()) {
                 request.setAttribute("groups", allGroups);
                 request.setAttribute("student", student.get());
                 request.setAttribute("group", student.get().getGroup());
-                request.getRequestDispatcher("/views/addstudent.jsp").forward(request, response);
+                request.getRequestDispatcher("/views/student/addstudent.jsp").forward(request, response);
 
             } else {
                 request.setAttribute("error", "Student is not present");
-                request.getRequestDispatcher("/views/error.jsp").forward(request, response);
+                request.getRequestDispatcher("/views/errors/error.jsp").forward(request, response);
             }
         } else {
             request.setAttribute("groups", allGroups);
-            request.getRequestDispatcher("/views/addstudent.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/student/addstudent.jsp").forward(request, response);
         }
 
     }

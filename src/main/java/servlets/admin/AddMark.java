@@ -7,6 +7,7 @@ import jdbc.SubjectRepository;
 import model.Mark;
 import model.Subject;
 import model.SubjectType;
+import service.MarkService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,10 +24,9 @@ public class AddMark extends HttpServlet {
         int student_id = Integer.parseInt(request.getParameter("studentSelect"));
         int mark = Integer.parseInt(request.getParameter("mark"));
         try {
-            StudentRepository.addMarkForStudent(StudentRepository.getStudentById(student_id).get(),SubjectRepository.getSubjectByID(subject_id).get(),mark);
-            request.setAttribute("marks",StudentRepository.getStudentMarks(student_id));
+            request.setAttribute("marks", MarkService.addMarkForStudent(student_id,subject_id,mark));
 
-            request.getRequestDispatcher("/views/mark.jsp").forward(request,response);
+            request.getRequestDispatcher("/views/student/mark.jsp").forward(request,response);
         } catch (SQLException | MarkException throwables) {
             throwables.printStackTrace();
         }
@@ -37,7 +37,7 @@ public class AddMark extends HttpServlet {
         try {
             request.setAttribute("subjects", SubjectRepository.getAllSubjects());
             request.setAttribute("students", StudentRepository.getAllStudents());
-            request.getRequestDispatcher("/views/addmark.jsp").forward(request,response);
+            request.getRequestDispatcher("/views/student/addmark.jsp").forward(request,response);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

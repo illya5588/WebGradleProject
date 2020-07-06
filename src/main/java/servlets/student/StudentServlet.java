@@ -24,7 +24,7 @@ import java.util.List;
 public class StudentServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    doGet(request,response);
+        doGet(request, response);
 
 
     }
@@ -46,41 +46,32 @@ public class StudentServlet extends HttpServlet {
             success = "All";
         }
 
-//        if(!"".equals(request.getParameter("page"))){
+
         if (request.getParameter("page") != null) {
             page = Integer.parseInt(request.getParameter("page"));
         }
 
         try {
             Pageable pageable = new Pageable(StudentService.getNumberOfPages(), criteria, order, success);
-
             request.setAttribute("currentpage", page);
-//            request.setAttribute("pages",StudentService.getNumberOfPages());
-//            request.setAttribute("criteria",criteria);
-//            request.setAttribute("order",order);
-
-            List<Student> allStudents=StudentService.getStudentsByCriteria(pageable,page);
-            int size=StudentRepository.getPagesBySurname(pageable.getSuccess());
-
-            if(size%5!=0){
-                pageable.setPages(size/5+1);
-            }
-            else{
-                pageable.setPages(size/5);
+            List<Student> allStudents = StudentService.getStudentsByCriteria(pageable, page);
+            int size = StudentService.getPageNumber(pageable.getSuccess());
+            if (size % 5 != 0) {
+                pageable.setPages(size / 5 + 1);
+            } else {
+                pageable.setPages(size / 5);
             }
 
             request.setAttribute("pageable", pageable);
             request.setAttribute("allstudents", allStudents);
-
-            request.getRequestDispatcher("/views/student.jsp").forward(request, response);
-
+            request.getRequestDispatcher("/views/student/student.jsp").forward(request, response);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             System.out.println(throwables.getMessage());
             request.setAttribute("error", throwables.getMessage());
-            request.getRequestDispatcher("/views/error.jsp");
+            request.getRequestDispatcher("/views/errors/error.jsp");
         }
 
-   }
+    }
 }

@@ -1,9 +1,6 @@
 package servlets.admin;
 
-import jdbc.GroupRepository;
-import jdbc.StudentRepository;
-import model.Group;
-import model.Student;
+import service.StudentService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,11 +17,8 @@ public class AddStudentToGroup extends HttpServlet {
     int studentId = Integer.parseInt(request.getParameter("studentSelect"));
     int groupId = Integer.parseInt(request.getParameter("groupId"));
         try {
-            Student student = StudentRepository.getStudentById(studentId).get();
-            Group group = GroupRepository.getGroupById(groupId);
-            GroupRepository.addStudentToGroup(student,group);
-            request.setAttribute("groupstudents",GroupRepository.getStudentsByGroup(group));
-            request.getRequestDispatcher("/views/groupstudents.jsp").forward(request,response);
+            request.setAttribute("groupstudents", StudentService.addStudentToGroup(studentId,groupId));
+            request.getRequestDispatcher("/views/group/groupstudents.jsp").forward(request,response);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -37,8 +31,8 @@ public class AddStudentToGroup extends HttpServlet {
         try {
             int groupId = Integer.parseInt(request.getParameter("id"));
             request.setAttribute("groupID",groupId);
-            request.setAttribute("students",StudentRepository.getAllStudents());
-            request.getRequestDispatcher("/views/addstudenttogroup.jsp").forward(request,response);
+            request.setAttribute("students",StudentService.getAllStudents());
+            request.getRequestDispatcher("/views/student/addstudenttogroup.jsp").forward(request,response);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

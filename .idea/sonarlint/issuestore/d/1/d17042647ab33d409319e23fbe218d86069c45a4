@@ -1,21 +1,21 @@
 
-W
-java:S1128"5Remove this unused import 'exceptions.NameException'.(«Ôı­ùÿÿÿÿ8å¡’¡.
+h	java:S1009"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¹ššùÿÿÿÿÿ
+V	java:S125-"<This block of commented-out lines of code should be removed.(ìš°¹ıÿÿÿÿ
+k	java:S117("QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ïùµ¤ÿÿÿÿÿ
+c	java:S100="NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯Ñˆó
+\
+java:S1161x":Add the "@Override" annotation above this method signature(ı·¡Íùÿÿÿÿ8–ÆÃÄŸ.
+X	java:S125h"<This block of commented-out lines of code should be removed.(©°È8©©¢£¢.
 \
 java:S1161b":Add the "@Override" annotation above this method signature(¹ÿùşÿÿÿÿ8•ÆÃÄŸ.
 c	java:S100p"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Óúšå
-k	java:S117("QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ïùµ¤ÿÿÿÿÿ
-f	java:S117="QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯Ñˆó
-V	java:S125-"<This block of commented-out lines of code should be removed.(ìš°¹ıÿÿÿÿ
-q	java:S116"WRename this field "student_uuid" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¢©ûøÿÿÿÿ
-\
-java:S1161l":Add the "@Override" annotation above this method signature(ú›Šøøÿÿÿÿ8–ÆÃÄŸ.
-c	java:S100="NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯Ñˆó
-X	java:S125h"<This block of commented-out lines of code should be removed.(©°È8©©¢£¢.
 t
 java:S1171$"YMove the contents of this initializer to a standard constructor or to field initializers.(ÒÌâ–øÿÿÿÿ
-h	java:S1009"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¹ššùÿÿÿÿÿ
-\
-java:S1161x":Add the "@Override" annotation above this method signature(ı·¡Íùÿÿÿÿ8–ÆÃÄŸ.
-h	java:S100("NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ïùµ¤ÿÿÿÿÿ
 o	java:S116"URename this field "student_ID" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(½ñ”Üùÿÿÿÿ
+\
+java:S1161l":Add the "@Override" annotation above this method signature(ú›Šøøÿÿÿÿ8–ÆÃÄŸ.
+W
+java:S1128"5Remove this unused import 'exceptions.NameException'.(«Ôı­ùÿÿÿÿ8å¡’¡.
+q	java:S116"WRename this field "student_uuid" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¢©ûøÿÿÿÿ
+f	java:S117="QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯Ñˆó
+h	java:S100("NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ïùµ¤ÿÿÿÿÿ

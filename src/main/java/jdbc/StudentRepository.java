@@ -20,31 +20,19 @@ public class StudentRepository {
     private static String ADD_MARKS = "INSERT INTO marks (student_id,subject_id,mark,created_on)"
             + "values(?,?,?,?)";
 
-    //TODO sort by group
-    //TODO buttons (by surname, by group(by surname))
-    //TODO service and DTO
-    //TODO pagination
-    public static Map<Integer, List<Student>> getStudentsByPage() throws SQLException {
-        int numberOfPages = numOfPages();
-        int start = 0;
-        Map<Integer, List<Student>> studentPages = new HashMap<>();
-        for (int i = 1; i <= numberOfPages; i++) {
-            studentPages.put(i, getPage(start));
-            start = start + 5;
-        }
-        return studentPages;
-    }
-
-    //TODO start, limit, rename
-    public static List<Student> getPage(int page) throws SQLException {
+    public static List<Student> getPage(int page, String success) throws SQLException {
         int start = (page - 1) * 5;
         List<Student> allStudents = new ArrayList<>();
         String GET_ALL_STUDENTS = "select * from students join users on(users.user_id = students.user_id) limit " + LIMIT + " offset  " + start;
-
+        String GET_ALL_UNCLASSIFIED_STUDENTS = "select distinct surname, name, dateOfBirth, students.student_id, group_id from students join users on(users.user_id = students.user_id) join marks on(students.student_id=marks.student_id) where mark<50 order by surname limit " + LIMIT + " offset  " + start;
         Connection connection = PostgresSqlConnection.getConnection();
         Statement statement = connection.createStatement();
-        ResultSet rs = statement.executeQuery(GET_ALL_STUDENTS);
-
+        ResultSet rs = null;
+        if ("unclassified".equals(success)) {
+            rs = statement.executeQuery(GET_ALL_UNCLASSIFIED_STUDENTS);
+        } else {
+            rs = statement.executeQuery(GET_ALL_STUDENTS);
+        }
         while (rs.next()) {
             Student student = new Student(rs.getString("surname"), rs.getString("name"), rs.getDate("dateofbirth").toLocalDate());
             student.setStudent_ID(rs.getInt("student_id"));
@@ -68,8 +56,8 @@ public class StudentRepository {
         Connection connection = PostgresSqlConnection.getConnection();
         Statement statement = connection.createStatement();
         ResultSet rs = null;
-        if("unclassified".equals(success)){
-             rs = statement.executeQuery(GET_ALL_UNCLASSIFIED_STUDENTS);
+        if ("unclassified".equals(success)) {
+            rs = statement.executeQuery(GET_ALL_UNCLASSIFIED_STUDENTS);
         } else {
             rs = statement.executeQuery(GET_ALL_STUDENTS);
         }
@@ -89,20 +77,19 @@ public class StudentRepository {
     }
 
     public static int getPagesBySurname(String success) throws SQLException {
-        int result=0;
-        String GET_ALL_STUDENTS = "select count (*) from students join users on(users.user_id = students.user_id) " ;
+        int result = 0;
+        String GET_ALL_STUDENTS = "select count (*) from students join users on(users.user_id = students.user_id) ";
         String GET_ALL_UNCLASSIFIED_STUDENTS = "select count( distinct surname) from students join users on(users.user_id = students.user_id) join marks on(students.student_id=marks.student_id) where mark<50";
         Connection connection = PostgresSqlConnection.getConnection();
         Statement statement = connection.createStatement();
         ResultSet rs = null;
-        if("unclassified".equals(success)){
+        if ("unclassified".equals(success)) {
             rs = statement.executeQuery(GET_ALL_UNCLASSIFIED_STUDENTS);
         } else {
             rs = statement.executeQuery(GET_ALL_STUDENTS);
         }
         while (rs.next()) {
-            result=rs.getInt(1);
-
+            result = rs.getInt(1);
 
 
         }
@@ -111,14 +98,19 @@ public class StudentRepository {
         return result;
     }
 
-    public static List<Student> getPageByGroup(int page, String order) throws SQLException {
+    public static List<Student> getPageByGroup(int page, String order, String success) throws SQLException {
         int start = (page - 1) * LIMIT;
         List<Student> allStudents = new ArrayList<>();
         String GET_ALL_STUDENTS = "select * from students join users on(users.user_id = students.user_id) order by group_id " + order + " , surname ASC  limit " + LIMIT + " offset  " + start;
-
+        String GET_ALL_UNCLASSIFIED_STUDENTS = "select distinct surname, name, dateOfBirth, students.student_id, group_id from students join users on(users.user_id = students.user_id) join marks on(students.student_id=marks.student_id) where mark<50 order by group_id " + order + ", surname ASC  limit " + LIMIT + " offset  " + start;
         Connection connection = PostgresSqlConnection.getConnection();
         Statement statement = connection.createStatement();
-        ResultSet rs = statement.executeQuery(GET_ALL_STUDENTS);
+        ResultSet rs = null;
+        if ("unclassified".equals(success)) {
+            rs = statement.executeQuery(GET_ALL_UNCLASSIFIED_STUDENTS);
+        } else {
+            rs = statement.executeQuery(GET_ALL_STUDENTS);
+        }
 
         while (rs.next()) {
             Student student = new Student(rs.getString("surname"), rs.getString("name"), rs.getDate("dateofbirth").toLocalDate());
@@ -395,9 +387,10 @@ public class StudentRepository {
 
         return false;
     }
+
     public static boolean isStudentPresentByUserId(int userId) throws SQLException {
 
-        String sql = "select student_id from students  where user_id="+userId+";";
+        String sql = "select student_id from students  where user_id=" + userId + ";";
         Connection connection = PostgresSqlConnection.getConnection();
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery(sql);
@@ -408,8 +401,9 @@ public class StudentRepository {
 
         return false;
     }
+
     public static boolean addStudentByUserId(int userId) throws SQLException {
-        if(!(isStudentPresentByUserId(userId))){
+        if (!(isStudentPresentByUserId(userId))) {
             try (Connection connection = PostgresSqlConnection.getConnection()) {
                 PreparedStatement preparedStatement = connection.prepareStatement(ADD_NEW_STUDENT, Statement.RETURN_GENERATED_KEYS);
                 preparedStatement.setObject(1, Student.genID());

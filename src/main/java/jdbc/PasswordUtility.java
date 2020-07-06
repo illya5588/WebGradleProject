@@ -19,7 +19,7 @@ public class PasswordUtility {
 
         StringBuilder returnValue = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
-            returnValue.append(ALPHABET.charAt(i));
+            returnValue.append(ALPHABET.charAt(new Random().nextInt(ALPHABET.length())));
         }
         return returnValue.toString();
     }

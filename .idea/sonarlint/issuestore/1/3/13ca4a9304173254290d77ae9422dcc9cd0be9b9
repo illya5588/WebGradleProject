@@ -1,0 +1,28 @@
+
+E
+java:S1128"*Remove this unused import 'model.Subject'.(¹›÷®ùÿÿÿÿ
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÊÔëªÿÿÿÿÿ
+>
+java:S1148'"#Use a logger to log this exception.(Ö·÷şÿÿÿÿ
+U
+java:S1128"3Remove this unused import 'jdbc.StudentRepository'.(†‘õƒüÿÿÿÿ8ı”ú«.
+B
+java:S1128"'Remove this unused import 'model.Mark'.(’Á¶’şÿÿÿÿ
+t
+java:S1989"YHandle the following exception that could be thrown by "parseInt": NumberFormatException.(ÊÔëªÿÿÿÿÿ
+I
+java:S1128".Remove this unused import 'java.util.HashMap'.(™˜”€ùÿÿÿÿ
+U
+java:S1128"3Remove this unused import 'jdbc.SubjectRepository'.(©£ëıÿÿÿÿ8¼™šú«.
+œ
+java:S1186+"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ïû©Öûÿÿÿÿ
+U
+java:S1161+":Add the "@Override" annotation above this method signature(Ïû©Öûÿÿÿÿ
+P
+java:S1161":Add the "@Override" annotation above this method signature(‹¨¯¿
+@
+java:S1128"*Remove this unused import 'model.Student'.(¹™ ¯
+E
+java:S1128"*Remove this unused import 'java.util.Map'.(¼è½Òşÿÿÿÿ
+Y
+java:S3655"7Call "Optional#isPresent()" before accessing the value.(Î‚ú¦ûÿÿÿÿ8êÓ®û«.

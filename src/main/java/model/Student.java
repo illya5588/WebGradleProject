@@ -3,19 +3,30 @@ package model;
 import exceptions.DateException;
 import exceptions.NameException;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
+@Entity
 
-public class Student extends User implements Comparable<Student> {
+@Table(name="students")
+
+public class Student extends User /*implements Comparable<Student>*/ {
 
 
     UUID student_uuid;
     private float averageMark;
+    @Transient
     protected Map<Subject, Mark> marks;
-    protected int student_ID;
+
+  // @Column(name="student_id")
+    @Transient
+   protected int student_ID;
+
+    @ManyToOne
+    @JoinColumn(name = "group_id")
     protected Group group;
 
     public Group getGroup() {
@@ -126,7 +137,7 @@ public class Student extends User implements Comparable<Student> {
     }
 
 
-    @Override
+//    @Override
     public int compareTo(Student o) {
         if (this.equals(o)) {
             return 0;

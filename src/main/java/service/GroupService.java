@@ -7,6 +7,7 @@ import model.Group;
 import model.Student;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -90,9 +91,6 @@ public class GroupService {
         return buf;
     }
 
-    //TODO get unclassified student list
-//TODO create method deleteStudentFromGroup
-//TODO install PostgreSQL
     public Set<Student> getUnclassifiedStudents() {
         Set<Student> buf = getGroup().getGroupList();
         buf = buf.stream()
@@ -111,6 +109,24 @@ public class GroupService {
         getGroup().getGroupList().addAll(buf);
 
 
+    }
+
+    public static void addGroup(String name, String dateOfCreation) throws SQLException {
+        String[] date = dateOfCreation.split("-");
+        Group group = new Group(name, LocalDate.of(Integer.valueOf(date[2]), Integer.valueOf(date[1]), Integer.valueOf(date[0])));
+        GroupRepository.addGroup(group);
+    }
+
+    public static List<Group> getGroups() {
+        return GroupRepository.getAllGroups();
+    }
+
+    public static Group getGroupById(int id) throws SQLException {
+        return GroupRepository.getGroupById(id);
+    }
+
+    public static Set<Student> getStudentsByGroup(Group group) throws SQLException {
+       return GroupRepository.getStudentsByGroup(group);
     }
 }
 

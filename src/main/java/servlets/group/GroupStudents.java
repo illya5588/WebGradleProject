@@ -4,6 +4,7 @@ import exceptions.NameException;
 import jdbc.GroupRepository;
 import jdbc.StudentRepository;
 import model.Group;
+import service.GroupService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,15 +26,16 @@ public class GroupStudents extends HttpServlet {
 
 
         try {
-            group = GroupRepository.getGroupById(id);
+            group = GroupService.getGroupById(id);
+
         } catch (SQLException | NameException throwables) {
             throwables.printStackTrace();
         }
         try {
             request.setAttribute("groupId",id);
             request.setAttribute("name",group.getName());
-            request.setAttribute("groupstudents",GroupRepository.getStudentsByGroup(group));
-            request.getRequestDispatcher("/views/groupstudents.jsp").forward(request,response);
+            request.setAttribute("groupstudents",GroupService.getStudentsByGroup(group));
+            request.getRequestDispatcher("/views/group/groupstudents.jsp").forward(request,response);
         } catch (SQLException | NameException throwables) {
             throwables.printStackTrace();
         }

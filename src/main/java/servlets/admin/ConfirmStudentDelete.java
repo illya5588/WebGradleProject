@@ -12,10 +12,10 @@ public class ConfirmStudentDelete extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
         request.setAttribute("id",Integer.parseInt(id));
-        request.getRequestDispatcher("/views/confirmdelete.jsp").forward(request,response);
+        request.getRequestDispatcher("/views/student/confirmdelete.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    request.getRequestDispatcher("/views/confirmdelete.jsp").forward(request,response);
+    request.getRequestDispatcher("/views/student/confirmdelete.jsp").forward(request,response);
     }
 }

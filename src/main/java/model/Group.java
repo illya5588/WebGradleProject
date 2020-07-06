@@ -2,16 +2,32 @@ package model;
 
 import exceptions.DateException;
 
+import javax.persistence.*;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.LinkedHashSet;
 import java.util.Set;
-
+@Entity
+@Table(name = "groups", uniqueConstraints = @UniqueConstraint(columnNames = {"name","creation_date"}))
 public class Group {
-    protected String name;
-    protected LocalDate dateOfCreation;
+
+    @Id
+    @GeneratedValue
     protected int id;
+
+    protected String name;
+
+    public Group(String name) {
+        this.name = name;
+    }
+
+    @Column(name="creation_date")
+    protected LocalDate dateOfCreation = LocalDate.now();
+
+    @OneToMany (mappedBy = "group")
+    protected Set<Student> groupList = new LinkedHashSet<>();
+
 
     public void setGroupList(Set<Student> groupList) {
         this.groupList = groupList;
@@ -37,7 +53,7 @@ public class Group {
         return groupList;
     }
 
-    protected Set<Student> groupList = new LinkedHashSet<>();
+
 
 
     public Group() {

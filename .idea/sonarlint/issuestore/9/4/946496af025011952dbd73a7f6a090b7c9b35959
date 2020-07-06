@@ -1,0 +1,28 @@
+
+U
+java:S1128"3Remove this unused import 'jdbc.StudentRepository'.(†‘õƒüÿÿÿÿ8é«®ú«.
+\
+java:S1161 ":Add the "@Override" annotation above this method signature(Ïû©Öûÿÿÿÿ8è¬ñ£.
+M
+java:S1128"0Remove this unused import 'java.io.PrintWriter'.(ÓŞÏÛ8ÚÁ¤©Ÿ.
+N
+java:S1128"1Remove this unused import 'jdbc.GroupRepository'.(šÛ›Ş8‚¶Š›¢.
+D
+java:S1128	"'Remove this unused import 'model.User'.(˜Ğ ñ8Ìë˜¬Ÿ.
+E
+java:S1128"(Remove this unused import 'model.Group'.(®ä¨ˆ8‚¶Š›¢.
+R
+java:S1128"0Remove this unused import 'jdbc.UserRepository'.(ğ§–œøÿÿÿÿ8®§˜¬Ÿ.
+
+java:S1989"_Handle the following exceptions that could be thrown by "doGet": ServletException, IOException.(®Ó‘ûÿÿÿÿÿ8ì‡î¸¥.
+W
+java:S1128"5Remove this unused import 'exceptions.NameException'.(«Ôı­ùÿÿÿÿ8šˆ™¬Ÿ.
+W
+java:S1161":Add the "@Override" annotation above this method signature(‹¨¯¿8´Âæ¸¥.
+v
+java:S19893"YHandle the following exception that could be thrown by "parseInt": NumberFormatException.(İÜúö8ŸğÕ©.
+E
+java:S1148F"#Use a logger to log this exception.(Ö·÷şÿÿÿÿ8ó©¤øª.
+~
+java:S1989C"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(ñ¢À½8ó©¤øª.
+U	java:S106G"9Replace this use of System.out or System.err by a logger.(î©÷8ó©¤øª.

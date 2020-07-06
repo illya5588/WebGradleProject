@@ -1,25 +1,58 @@
 package model;
 
+import com.sun.istack.NotNull;
 import exceptions.DateException;
 import exceptions.NameException;
 
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
-
+@Entity
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = {"surname","name","birth_date"}))
+@Inheritance(strategy = InheritanceType.JOINED)
 public  class User {
     private static final int MAX_LENGTH_NAME = 15;
     private static final int MAX_LENGHT_SURNAME = 20;
-    protected String surname;
-    protected String name;
-    protected LocalDate DOB;
+    @Id
+    @GeneratedValue
+    @Column(name = "user_id")
     protected int ID;
+
+    @Column(name="surname")
+    protected String surname;
+
+    @Column(name = "name")
+    protected String name;
+
+    @Column(name = "birth_date")
+    protected LocalDate DOB;
+
+    //TODO javax validation
+    // @NotNull
+    @Column(nullable = false)
     protected String login;
+
+    @Column(nullable = false)
     protected String password;
+
+    @Column(name = "role")
     protected String role;
+
+    @Column(name = "base64")
     protected String base64;
 
+    @Column(nullable = false)
+    boolean confirmed;
+
+    public boolean isConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        this.confirmed = confirmed;
+    }
 
     public String getBase64() {
         return base64;

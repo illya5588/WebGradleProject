@@ -9,6 +9,7 @@ import model.User;
 import service.ConfirmationService;
 import service.StudentService;
 import service.TeacherService;
+import service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,17 +26,8 @@ public class ConfirmUsers extends HttpServlet {
         String role = request.getParameter("role");
         int id  = Integer.parseInt(request.getParameter("id"));
 
-
         try {
-            switch (role) {
-                case "student":
-                    StudentService.confirmStudent(id);
-                    break;
-                case "teacher":
-                    TeacherService.confirmTeacher(id);
-                    break;
-            }
-            request.setAttribute("allusers", UserRepository.getUnconfirmedUsers());
+            request.setAttribute("allusers", UserService.confirmUser(id,role));
             request.getRequestDispatcher("/views/confirmation.jsp").forward(request,response);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -44,8 +36,8 @@ public class ConfirmUsers extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            request.setAttribute("allusers", UserRepository.getUnconfirmedUsers());
-            request.getRequestDispatcher("/views/confirmation.jsp").forward(request,response);
+            request.setAttribute("allusers", UserService.getUnconfirmedUsers());
+            request.getRequestDispatcher("/views/utils/confirmation.jsp").forward(request,response);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

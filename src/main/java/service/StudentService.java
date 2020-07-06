@@ -1,9 +1,11 @@
 package service;
 
+import exceptions.MarkException;
 import exceptions.NameException;
 import jdbc.GroupRepository;
 import jdbc.StudentRepository;
 import jdbc.UserRepository;
+import model.Group;
 import model.Mark;
 import model.Student;
 import model.Subject;
@@ -47,10 +49,10 @@ public class StudentService {
                     allStudents = StudentRepository.getPageBySurname(page,pageable.order,pageable.success);
                 break;
             case ("By group"):
-                allStudents = StudentRepository.getPageByGroup(page,pageable.order);
+                allStudents = StudentRepository.getPageByGroup(page,pageable.order,pageable.success);
                 break;
             case ("Default"):
-                allStudents = StudentRepository.getPage(page);
+                allStudents = StudentRepository.getPage(page,pageable.success);
                 break;
         }
         return allStudents;
@@ -68,10 +70,6 @@ public class StudentService {
     public static Set<Student> getStudentsByGroupAndSurname() throws SQLException {
         return StudentRepository.getStudentsByGroupAndSurname();
 
-    }
-
-    public static Map<Integer, List<Student>> getStudentPages() throws SQLException {
-        return StudentRepository.getStudentsByPage();
     }
 
     public static void addOrEditStudent(Student student, int groupId) throws NameException, SQLException {
@@ -97,32 +95,6 @@ public class StudentService {
         }
         return sb;
     }
-
-
-//    public char markTransformation(Mark mark) {
-//        if (mark > 100 || mark < 0) {
-//            throw new IllegalArgumentException("Invalid value of mark!");
-//        }
-//
-//        if (mark >= 90) {
-//            return 'A';
-//        }
-//        if (mark >= 80) {
-//            return 'B';
-//        }
-//        if (mark >= 70) {
-//            return 'C';
-//        }
-//        if (mark >= 60) {
-//            return 'D';
-//        }
-//        if (mark>=50) {
-//            return 'F';
-//        }
-//        return 'U';
-//
-//    }
-
 
     public int age() {
         LocalDate today = LocalDate.now();
@@ -152,6 +124,39 @@ public class StudentService {
         System.out.println("\n\n" + this.student);
 
 
+    }
+
+    public static Set<Student> addStudentToGroup(int studentId, int groupId) throws SQLException {
+        Student student = StudentRepository.getStudentById(studentId).get();
+        Group group = GroupRepository.getGroupById(groupId);
+        GroupRepository.addStudentToGroup(student,group);
+        return GroupRepository.getStudentsByGroup(group);
+    }
+    public static List<Student> getAllStudents() throws SQLException {
+        return StudentRepository.getAllStudents();
+    }
+
+    public static Optional<Student> getStudentById(int id) throws SQLException {
+       return StudentRepository.getStudentById(id);
+    }
+
+    public static void deleteStudent(int id){
+        StudentRepository.deleteStudentById(id);
+    }
+
+    public static Map<Subject,Mark> getStudentMarks(int id) throws MarkException, SQLException {
+        return StudentRepository.getStudentMarks(id);
+    }
+
+    public static List<Student> searchStudents(String parameter) throws SQLException {
+        return StudentRepository.searchStudents(parameter);
+    }
+    public static int getPageNumber(String success) throws SQLException {
+        return StudentRepository.getPagesBySurname(success);
+    }
+
+    public static Set<Student> getUnclassifiedStudents() throws SQLException {
+        return StudentRepository.getUnclassified();
     }
 
 }

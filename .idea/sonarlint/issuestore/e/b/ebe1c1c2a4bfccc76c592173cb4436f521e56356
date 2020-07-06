@@ -1,39 +1,39 @@
 
-S	java:S106k"9Replace this use of System.out or System.err by a logger.(Åáî­üÿÿÿÿ
-q
-java:S2095("OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(‹®ÜÅıÿÿÿÿ8äĞíçª.
-S	java:S106L"9Replace this use of System.out or System.err by a logger.(™ŒÊ¦úÿÿÿÿ
-d
-java:S20959"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(‚µŠ¯8¥Ãæçª.
-i
-java:S20958"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8¥Ãæçª.
-N	java:S106u"9Replace this use of System.out or System.err by a logger.(ƒùè´
-€
-java:S1130B"cRemove the declaration of thrown exception 'exceptions.NameException' which is a runtime exception.(™Å›8¹Ş»Ğ¦.
-L
-java:S1751X"6Remove this "return" statement or make it conditional.(§¼Éç
-S
-java:S1751<"6Remove this "return" statement or make it conditional.(§¼Éç8¥Ãæçª.
->
-java:S1148w"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
-M
-java:S1135"2Complete the task associated to this TODO comment.(Şë÷™øÿÿÿÿ
+r	java:S117$"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(³äüúÿÿÿÿ8Û‘áçª.
 P
 java:S1118":Add a private constructor to hide the implicit public one.(íœÊá
-…
-java:S1130"cRemove the declaration of thrown exception 'exceptions.NameException' which is a runtime exception.(»Ûš¸ıÿÿÿÿ8¹Ş»Ğ¦.
-S	java:S106h"9Replace this use of System.out or System.err by a logger.(£Áâ£úÿÿÿÿ
-p
-java:S3008"ZRename this field "ADD_NEW_TEACHER" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ë§Èš
-]
-java:S2095U"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(‚µŠ¯
+>
+java:S1148w"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+d
+java:S20959"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(‚µŠ¯8¥Ãæçª.
+N	java:S106u"9Replace this use of System.out or System.err by a logger.(ƒùè´
 M
 java:S1135"2Complete the task associated to this TODO comment.(§‹Œœøÿÿÿÿ
-j
-java:S2095D"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(‹®ÜÅıÿÿÿÿ
+q
+java:S2095("OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(‹®ÜÅıÿÿÿÿ8äĞíçª.
 b
 java:S2095T"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ
+i
+java:S20958"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8¥Ãæçª.
+j
+java:S2095D"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(‹®ÜÅıÿÿÿÿ
 Z	java:S106-"9Replace this use of System.out or System.err by a logger.(™ŒÊ¦úÿÿÿÿ8‹™ìçª.
+…
+java:S1130"cRemove the declaration of thrown exception 'exceptions.NameException' which is a runtime exception.(»Ûš¸ıÿÿÿÿ8¹Ş»Ğ¦.
+p
+java:S3008"ZRename this field "ADD_NEW_TEACHER" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ë§Èš
 G
 java:S1128"*Remove this unused import 'model.Student'.(¹™ ¯8ªıóçª.
-r	java:S117$"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(³äüúÿÿÿÿ8Û‘áçª.
+S	java:S106L"9Replace this use of System.out or System.err by a logger.(™ŒÊ¦úÿÿÿÿ
+S
+java:S1751<"6Remove this "return" statement or make it conditional.(§¼Éç8¥Ãæçª.
+L
+java:S1751X"6Remove this "return" statement or make it conditional.(§¼Éç
+€
+java:S1130B"cRemove the declaration of thrown exception 'exceptions.NameException' which is a runtime exception.(™Å›8¹Ş»Ğ¦.
+S	java:S106h"9Replace this use of System.out or System.err by a logger.(£Áâ£úÿÿÿÿ
+M
+java:S1135"2Complete the task associated to this TODO comment.(Şë÷™øÿÿÿÿ
+]
+java:S2095U"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(‚µŠ¯
+S	java:S106k"9Replace this use of System.out or System.err by a logger.(Åáî­üÿÿÿÿ

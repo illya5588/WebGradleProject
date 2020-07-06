@@ -6,6 +6,8 @@ import jdbc.SubjectRepository;
 import model.Mark;
 import model.Student;
 import model.Subject;
+import service.StudentService;
+import service.SubjectService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,10 +26,10 @@ public class GetMarks extends HttpServlet {
 
         try {
             request.setAttribute("id",student_id);
-            request.setAttribute("student",StudentRepository.getStudentById(student_id).get());
-            request.setAttribute("marks",StudentRepository.getStudentMarks(student_id));
-            request.setAttribute("subjects", SubjectRepository.getAllSubjects());
-            request.getRequestDispatcher("/views/mark.jsp").forward(request,response);
+            request.setAttribute("student",StudentService.getStudentById(student_id).get());
+            request.setAttribute("marks",StudentService.getStudentMarks(student_id));
+            request.setAttribute("subjects", SubjectService.getAllSubjects());
+            request.getRequestDispatcher("/views/student/mark.jsp").forward(request,response);
 
 
 
